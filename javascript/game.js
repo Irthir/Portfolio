@@ -66,7 +66,8 @@ export default class MainScene extends Phaser.Scene
 
         for (let index = 0; index < 6; index++)
         {
-            swords.push(new Sword(this, "sword",this.player.getCaex(),platforms, 100+100*index, 100));
+            var x = 150+100*index;
+            swords.push(new Sword(this, "sword",this.player.getCaex(),platforms, x, 100));
         }
     }
 

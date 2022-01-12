@@ -4,6 +4,8 @@
 -Mise en place de l'objet épée.
 -Validation de l'utilisation d'un update dans un objet.
 -Validation de la gestion des collisions avec des objets.
+### Modification
+-Correction d'un bug sur l'affichage de la première épée.
 
 ## [0.0.3] - 2022-01-11
 ### Recherches
