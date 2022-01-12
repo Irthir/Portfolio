@@ -1,3 +1,14 @@
+## [0.0.4] - 2022-01-12
+### Ajout
+-Mise en place de l'objet joueur.
+-Mise en place de l'objet épée.
+-Validation de l'utilisation d'un update dans un objet.
+-Validation de la gestion des collisions avec des objets.
+
+## [0.0.3] - 2022-01-11
+### Recherches
+-Recherche quant à la création d'un modèle objet pour phaser 3.
+
 ## [0.0.2] - 2022-01-10
 ### Ajout
 -Mise en place du phaser.min.js
