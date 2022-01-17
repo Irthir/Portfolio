@@ -1,3 +1,10 @@
+## [0.0.5] - 2022-01-17
+### Ajout
+-Mise en place de la classe position.
+-Mise en place des états des épées.
+-Travail sur la télékinésie et l'envoie des épées.
+-Adaptation de la zone de jeu à la taille de l'écran effectif.
+
 ## [0.0.4] - 2022-01-12
 ### Ajout
 -Mise en place de l'objet joueur.

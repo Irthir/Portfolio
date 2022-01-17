@@ -6,15 +6,17 @@ function init()
 {
     config = {
     type: Phaser.AUTO,
-    width: 800,
-    height: 600,
+    width: 1920,
+    height: 1080,
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 200 }
+            gravity: { y: 200 },
+            debug : true
         }
     },
-    scene: [MainScene]
+    scene: [MainScene],
+    scale: {mode: Phaser.Scale.FIT}
     };
 
     game = new Phaser.Game(config);

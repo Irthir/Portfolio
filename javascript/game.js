@@ -3,6 +3,7 @@ import Sword from "./sword.js";
 
 var platforms
 var swords = Array();
+var updates = Array();
 
 export default class MainScene extends Phaser.Scene
 {
@@ -10,6 +11,7 @@ export default class MainScene extends Phaser.Scene
     constructor(config)
     {
         super("main");
+        this.config = config;
     }
 
     preload ()
@@ -50,15 +52,19 @@ export default class MainScene extends Phaser.Scene
 
     create ()
     {
-        this.add.image(400, 300, 'sky');
+        this.scale.displaySize.setAspectRatio( 1920/1080);
+        this.scale.refresh();
+
+        this.add.image(1000, 600, 'sky').setScale(2.5);
 
         platforms = this.physics.add.staticGroup();
 
-        platforms.create(400, 568, 'platform').setScale(2).refreshBody();
+        platforms.create(1000, 1080, 'platform').setScale(5).refreshBody();
 
         //caex = this.physics.add.existing(new Player(this, 400, 450, 'caex')).setScale(0.2,0.2).refreshBody();
         
         this.player = new Player(this, "Joueur");
+        updates.push(this.player);
 
         //caex = this.physics.add.sprite(400,450, 'caex').setScale(0.2,0.2).refreshBody();
 
@@ -67,22 +73,19 @@ export default class MainScene extends Phaser.Scene
         for (let index = 0; index < 6; index++)
         {
             var x = 150+100*index;
-            swords.push(new Sword(this, "sword",this.player.getCaex(),platforms, x, 100));
+            var sword = new Sword(this, "sword",this.player,platforms, x, 100);
+            swords.push(sword);
+            updates.push(sword);
         }
     }
 
     update(time, delta)
     {
-    
-        /*if (cursors.down.isDown)
+        updates.forEach(element =>
         {
-            console.info('Display List:');
-            console.table(this.sys.displayList.list, [ 'name', 'type', 'x', 'y', 'visible', 'renderFlags', 'cameraFilter' ]);
-            console.info('Update List:');
-            console.table(this.sys.updateList._list, [ 'name', 'type', 'active' ]);
-        }*/
-
-        this.player.update(time, delta);
+            element.update(time, delta);
+        });
+        this.scale.refresh();
     }
     
 }
