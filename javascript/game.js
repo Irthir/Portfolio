@@ -97,7 +97,7 @@ export default class MainScene extends Phaser.Scene
             element.update(time, delta);
         });
         this.scale.refresh();
-        this.loadScene1();
+        //this.loadScene1();
     }
     
     loadScene1()
