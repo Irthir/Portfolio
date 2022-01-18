@@ -1,9 +1,13 @@
 var scale = Array(6);
 var sprite = Array(6);
+var vitesse = 600;
 
 export default class Sword extends Phaser.GameObjects.GameObject
 {
     constructor (scene, type, caex, platforms, x, y)
+    //BUT : Créer un objet représentant une épée.
+    //ENTREE : La scène, le type d'objet, le joueur, le sol et la position en x, y.
+    //SORTIE : La création d'un objet épée avec son sprite, ses évènements et ses collisions.
     {
         super(scene, type);
         scale = [0.1, 0.1, 0.1, 0.04, 0.04, 0.04];
@@ -14,6 +18,9 @@ export default class Sword extends Phaser.GameObjects.GameObject
         this.etat = 'sol'; 
         this.caex = caex;
         this.actif = false;
+
+        this.velX=0;
+        this.velY=0;
     }
 
     create(scene, caex, platforms, x, y)
@@ -31,6 +38,7 @@ export default class Sword extends Phaser.GameObjects.GameObject
         this.sword.setFlip(false, true);
         this.collider = scene.physics.add.collider(this.sword, platforms, this.touchGround.bind(this));
         this.overlap = scene.physics.add.overlap(this.sword, caex.getCaex(), this.telekineticSword.bind(this));
+        this.overlap = scene.physics.add.overlap(this.sword, platforms, this.touchGround.bind(this));
         this.input = scene.input;
 
         this.sword.setCollideWorldBounds(true);
@@ -47,15 +55,17 @@ export default class Sword extends Phaser.GameObjects.GameObject
         {
             if (this.actif)
             {
-                let angle=Phaser.Math.Angle.Between(this.sword.x,this.sword.y,this.input.x,this.input.y);
-                this.sword.setRotation(angle-(90*(Math.PI / 180)));
+                this.rotationTo(this.input.x,this.input.y);
             }
             else
             {
                 if(this.sword.rotation!=0)
                     this.sword.setRotation(0);
             }
-
+        }
+        else if (this.etat == "vol")
+        {
+            this.bounce();
         }
     }
 
@@ -71,24 +81,29 @@ export default class Sword extends Phaser.GameObjects.GameObject
 
     touchGround()
     {
-        this.actif = false;
-        this.etat = this.etats[0];
-        this.sword.setVelocity(0,0);
-        this.sword.body.setAllowGravity(false);
+        if (this.etat != "tel")
+        {
+            this.setEtat(0);
+            this.sword.setVelocity(0,0);
+            this.sword.body.setAllowGravity(false);
+        }
     }
 
     throw()
     {
         this.actif = false;
-        this.etat = this.etats[2];
+        this.setEtat(2)
 
-        var vec = new Phaser.Math.Vector2(100,100);
+        var vec = new Phaser.Math.Vector2(vitesse,vitesse);
         
         let angle=Phaser.Math.Angle.Between(this.sword.x,this.sword.y,this.input.x,this.input.y);
-        vec.rotate(angle+(90*(Math.PI / 180)));
-        console.log(angle+(90*(Math.PI / 180)));
+        vec.rotate(angle+(-45*(Math.PI / 180)));
 
         this.sword.setVelocity(vec.x, vec.y);
+
+        
+        this.velX = 0;
+        this.velY = 0;
     }
 
     setEtat(i)
@@ -113,5 +128,38 @@ export default class Sword extends Phaser.GameObjects.GameObject
     setActif(bool)
     {
         this.actif = bool;
+    }
+
+    bounce()
+    {
+        var velX = this.sword.body.velocity.x;
+        var velY = this.sword.body.velocity.y;
+
+        if (this.velX==0)
+        {
+            this.velX = velX;
+        }
+
+        if (this.velY==0)
+        {
+            this.velY = velY;
+        }
+
+        if ((this.velX!=velX && this.velX!=0) || (this.velY!=velY && this.velY!=0))
+        {
+            let x = this.sword.x + velX;
+            let y = this.sword.y + velY;
+
+            this.rotationTo(x,y);
+
+            this.velX = this.sword.body.velocity.x;
+            this.velY = this.sword.body.velocity.y;
+        }
+    }
+
+    rotationTo(x,y)
+    {
+        let angle=Phaser.Math.Angle.Between(this.sword.x,this.sword.y,x,y);
+        this.sword.setRotation(angle-(90*(Math.PI / 180)));
     }
 }

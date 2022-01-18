@@ -5,13 +5,11 @@ var platforms
 var swords = Array();
 var updates = Array();
 
-export default class MainScene extends Phaser.Scene
+export default class Scene1 extends Phaser.Scene
 {
-
-    constructor(config)
+    constructor()
     {
-        super("main");
-        this.config = config;
+        super("scene1");
     }
 
     preload ()
@@ -71,23 +69,11 @@ export default class MainScene extends Phaser.Scene
         platforms = this.physics.add.staticGroup();
 
         platforms.create(1000, 1080, 'platform').setScale(5).refreshBody();
-
-        //caex = this.physics.add.existing(new Player(this, 400, 450, 'caex')).setScale(0.2,0.2).refreshBody();
         
         this.player = new Player(this, "Joueur");
         updates.push(this.player);
 
-        //caex = this.physics.add.sprite(400,450, 'caex').setScale(0.2,0.2).refreshBody();
-
         this.physics.add.collider(this.player.getCaex(), platforms);
-
-        for (let index = 0; index < 38; index++)
-        {
-            var x = 50+50*index;
-            var sword = new Sword(this, "sword",this.player,platforms, x, 100);
-            swords.push(sword);
-            updates.push(sword);
-        }
     }
 
     update(time, delta)
@@ -97,11 +83,5 @@ export default class MainScene extends Phaser.Scene
             element.update(time, delta);
         });
         this.scale.refresh();
-        this.loadScene1();
-    }
-    
-    loadScene1()
-    {
-        this.scene.start("scene1");
     }
 }

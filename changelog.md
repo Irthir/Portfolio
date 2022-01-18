@@ -1,3 +1,16 @@
+## [0.0.6] - 2022-01-18
+### Modification
+-Correction de la collision des épées avec le sol.
+-Correction du rebond des épées avec le mur.
+-Adaptation du code.
+-Adaptation du jeu à la fenêtre.
+-Mise en place de la gestion des scènes.
+-Ajout du sprite des cadres.
+-Ajout de la font du texte.
+### Idée
+-Rajouter du son ?
+-Rajouter des dégâts sur le personnage ?
+
 ## [0.0.5] - 2022-01-17
 ### Ajout
 -Mise en place de la classe position.
