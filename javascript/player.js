@@ -120,7 +120,7 @@ export default class Player extends Phaser.GameObjects.GameObject
         }
 
         
-        caex = scene.physics.add.sprite(400,950, 'caex').setScale(0.2,0.2).refreshBody();
+        caex = scene.physics.add.sprite(960,960, 'caex').setScale(0.2,0.2).refreshBody();
         caex.setCollideWorldBounds(true);
         scene.physics.add.existing(caex);
         cursors = scene.input.keyboard.createCursorKeys();

@@ -4,7 +4,7 @@ var vitesse = 600;
 
 export default class Sword extends Phaser.GameObjects.GameObject
 {
-    constructor (scene, type, caex, platforms, x, y)
+    constructor (scene, type, caex, platforms, x, y, walls)
     //BUT : Créer un objet représentant une épée.
     //ENTREE : La scène, le type d'objet, le joueur, le sol et la position en x, y.
     //SORTIE : La création d'un objet épée avec son sprite, ses évènements et ses collisions.
@@ -13,7 +13,7 @@ export default class Sword extends Phaser.GameObjects.GameObject
         scale = [0.1, 0.1, 0.1, 0.04, 0.04, 0.04];
         sprite = ['epee01','epee02','epee03','epee04','epee05','epee06'];
         this.active = true;
-        this.create(scene, caex, platforms, x, y);
+        this.create(scene, caex, platforms, x, y, walls);
         this.etats = ['sol','tel','vol'];
         this.etat = 'sol'; 
         this.caex = caex;
@@ -23,7 +23,7 @@ export default class Sword extends Phaser.GameObjects.GameObject
         this.velY=0;
     }
 
-    create(scene, caex, platforms, x, y)
+    create(scene, caex, platforms, x, y, walls)
     {
         var min = Math.ceil(0);
         var max = Math.floor(5);
@@ -32,11 +32,13 @@ export default class Sword extends Phaser.GameObjects.GameObject
         //rand = this.getRandomIntInclusive(0,5);
         this.caex = caex;
         this.platforms = platforms;
+        this.walls = walls;
         this.scene = scene;
         
         this.sword = scene.physics.add.sprite(x,y, sprite[rand]).setScale(scale[rand]).refreshBody();
         this.sword.setFlip(false, true);
         this.collider = scene.physics.add.collider(this.sword, platforms, this.touchGround.bind(this));
+        this.collider = scene.physics.add.collider(this.sword, walls,null, null, this.scene);
         this.overlap = scene.physics.add.overlap(this.sword, caex.getCaex(), this.telekineticSword.bind(this));
         this.overlap = scene.physics.add.overlap(this.sword, platforms, this.touchGround.bind(this));
         this.input = scene.input;

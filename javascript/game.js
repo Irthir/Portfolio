@@ -3,6 +3,7 @@ import Sword from "./sword.js";
 import Trigger from "./triggerVolume.js";
 
 var platforms
+var walls
 var swords = Array();
 var updates = Array();
 
@@ -62,7 +63,8 @@ export default class MainScene extends Phaser.Scene
         this.load.image('platform', 'assets/platform.png');
 
         this.load.image('portfolio','assets/Projets/Portfolio.png');
-        this.load.image('levelDesign','assets/Projets/LevelDesign.png');
+        this.load.image('portfoliogamifie','assets/Projets/Caex.png');
+        this.load.image('wall','assets/wall.png');
     }
 
     create ()
@@ -73,9 +75,22 @@ export default class MainScene extends Phaser.Scene
         this.add.image(1000, 600, 'sky').setScale(2.5);
 
         platforms = this.physics.add.staticGroup();
+        walls = this.physics.add.staticGroup();
 
         platforms.create(1000, 1080, 'platform').setScale(5).refreshBody();
         
+        /*for (let index = 0; index < 5; index++) {
+            walls.create(960,64+128*index, 'wall');
+        }*/
+
+
+        for (let jndex = 0; jndex < 15; jndex++) {
+            for (let index = 0; index < 5; index++)
+            {
+                walls.create(64+128*jndex,64+128*index, 'wall');
+            }
+        }
+
         this.player = new Player(this, "Joueur");
         updates.push(this.player);
 
@@ -84,14 +99,14 @@ export default class MainScene extends Phaser.Scene
         for (let index = 0; index < 38; index++)
         {
             var x = 50+50*index;
-            var sword = new Sword(this, "sword",this.player,platforms, x, 1000);
+            var sword = new Sword(this, "sword",this.player,platforms, x, 1000, walls);
             swords.push(sword);
             updates.push(sword);
         }
 
-        this.trigger0 = new Trigger(this,"Trigger",swords,"portfolio",0.18,"https://romainschlotter.wixsite.com/portfolio",false,550,300);
+        //this.trigger0 = new Trigger(this,"Trigger",swords,"portfolio",0.18,"https://romainschlotter.wixsite.com/portfolio",false,480,300);
 
-        this.trigger1 = new Trigger(this,"Trigger",swords,"levelDesign",0.18,"scene1",true,1350,300);
+        //this.trigger1 = new Trigger(this,"Trigger",swords,"portfoliogamifie",0.18,"scene1",true,1440,300);
 
         //this.trigger2 = new Trigger(this,"Trigger",swords,"levelDesign",0.18,"https://romainschlotter.wixsite.com/portfolio/level-design-3d-gamekit",false,1350,300);
 
