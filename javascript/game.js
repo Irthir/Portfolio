@@ -88,6 +88,7 @@ export default class MainScene extends Phaser.Scene
             {
                 let wall = this.physics.add.sprite(64+128*jndex,64+128*index, 'wall');
                 wall.body.setAllowGravity(false);
+                wall.setCollideWorldBounds(true);
                 walls.add(wall);
             }
         }
