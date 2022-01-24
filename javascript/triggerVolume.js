@@ -24,14 +24,14 @@ export default class Trigger extends Phaser.GameObjects.GameObject
 
         this.swords.forEach(sword =>
         {
-            this.overlap = this.scene.physics.add.overlap(this.trigger, sword.getSword(), this.onTrigger.bind(this));    
+            this.overlap = this.scene.physics.add.overlap(this.trigger, sword.getSword(), this.onTrigger.bind(this, this.trigger, sword));    
         });        
         
         console.log(this.getbScene());
         console.log(this.getUrl());
         //this.onTrigger();
         
-        this.trigger.body.setAllowGravity(false);
+        //this.trigger.body.setAllowGravity(false);
 
         this.scene.physics.add.existing(this.trigger);
     }
@@ -48,7 +48,7 @@ export default class Trigger extends Phaser.GameObjects.GameObject
         return this.url;
     }
     
-    onTrigger()
+    onTrigger(trigger, sword)
     {
         if (this.bTrigger==false)
         {
@@ -64,7 +64,7 @@ export default class Trigger extends Phaser.GameObjects.GameObject
             this.bTrigger = true;
             this.resetTrigger();
         }
-        console.log(this.bTrigger);
+        sword.resetSword();
     }
 
     async resetTrigger() {

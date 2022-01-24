@@ -21,6 +21,9 @@ export default class Sword extends Phaser.GameObjects.GameObject
 
         this.velX=0;
         this.velY=0;
+
+        this.originX = x;
+        this.originY = y;
     }
 
     create(scene, caex, platforms, x, y, walls)
@@ -28,8 +31,7 @@ export default class Sword extends Phaser.GameObjects.GameObject
         var min = Math.ceil(0);
         var max = Math.floor(5);
         var rand = Math.floor(Math.random() * (max - min +1)) + min;
-        
-        //rand = this.getRandomIntInclusive(0,5);
+    
         this.caex = caex;
         this.platforms = platforms;
         this.walls = walls;
@@ -37,8 +39,10 @@ export default class Sword extends Phaser.GameObjects.GameObject
         
         this.sword = scene.physics.add.sprite(x,y, sprite[rand]).setScale(scale[rand]).refreshBody();
         this.sword.setFlip(false, true);
+
         this.collider = scene.physics.add.collider(this.sword, platforms, this.touchGround.bind(this));
-        this.collider = scene.physics.add.collider(this.sword, walls,null, null, this.scene);
+        this.collider = scene.physics.add.collider(this.sword, walls);
+        this.overlap = scene.physics.add.overlap(this.sword, walls, this.touchWall.bind(this,this.sword, walls));
         this.overlap = scene.physics.add.overlap(this.sword, caex.getCaex(), this.telekineticSword.bind(this));
         this.overlap = scene.physics.add.overlap(this.sword, platforms, this.touchGround.bind(this));
         this.input = scene.input;
@@ -48,7 +52,7 @@ export default class Sword extends Phaser.GameObjects.GameObject
         this.sword.body.setBounce(1,1);
         this.sword.body.isCircle = true;
 
-        scene.physics.add.existing(this.sword);
+        this.scene.physics.add.existing(this.sword);
     }
 
     update(time,delta)
@@ -87,7 +91,7 @@ export default class Sword extends Phaser.GameObjects.GameObject
         {
             this.setEtat(0);
             this.sword.setVelocity(0,0);
-            this.sword.body.setAllowGravity(false);
+            //this.sword.body.setAllowGravity(false);
         }
     }
 
@@ -113,17 +117,17 @@ export default class Sword extends Phaser.GameObjects.GameObject
         this.etat = this.etats[i];
         if (this.etat=='sol')
         {
-            this.sword.body.setAllowGravity(true);
+            //this.sword.body.setAllowGravity(true);
             this.sword.setVelocity(0, 0);
         }
         else if (this.etat=='tel')
         {
-            this.sword.body.setAllowGravity(false);
+            //this.sword.body.setAllowGravity(false);
             this.sword.setVelocity(0, 0);
         }
         else if (this.etat=='vol')
         {
-            this.sword.body.setAllowGravity(false);
+            //this.sword.body.setAllowGravity(false);
         }
     }
 
@@ -163,5 +167,62 @@ export default class Sword extends Phaser.GameObjects.GameObject
     {
         let angle=Phaser.Math.Angle.Between(this.sword.x,this.sword.y,x,y);
         this.sword.setRotation(angle-(90*(Math.PI / 180)));
+    }
+
+    touchWall(epee, mur)
+    {
+        console.log(epee);
+        console.log(mur);
+
+        let wall = this.getClosestWall(epee,mur);
+
+        let bounceX = 1;
+        let bounceY = 1;
+
+        if ((epee.body.velocity.x > 0 && wall.x>epee.x) || (epee.body.velocity.x < 0 && wall.x<epee.x))
+        {
+            bounceX = -1;
+        }
+
+        if ((epee.body.velocity.y > 0 && wall.y>epee.y) || (epee.body.velocity.y < 0 && wall.y<epee.y))
+        {
+            bounceY = -1;
+        }
+
+        this.sword.setVelocity(bounceX*this.sword.body.velocity.x,bounceY*this.sword.body.velocity.y);
+    }
+
+    getClosestWall(epee,mur)
+    {
+        let wall=null;
+        let dist = 0;
+
+        mur.getChildren().forEach(element =>
+        {
+            let walldist = Math.hypot(element.x-epee.x, element.y-epee.y);
+
+            if (wall == null)
+            {
+                wall = element;
+                dist = walldist;
+            }
+            else
+            {
+                if (walldist<dist)
+                {
+                    wall = element;
+                    dist = walldist;
+                }
+            }
+        });
+
+        return wall;
+    }
+
+    resetSword()
+    {
+        this.setEtat(0);
+        this.sword.x = this.originX;
+        this.sword.y = this.originY;
     }
 }

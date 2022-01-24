@@ -5,6 +5,9 @@
 -Mise en place de la redirection sur un trigger.
 -Mise en place du changement de scène sur un trigger.
 -Mise en place des images sur les triggers.
+-Mise en place des murs.
+-Correction de la collision avec les murs.
+-Recodage des collisions entre les épées et les murs.
 ## À Faire
 -Mettre en place quelques premiers puzzles.
 

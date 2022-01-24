@@ -65,6 +65,7 @@ export default class MainScene extends Phaser.Scene
         this.load.image('portfolio','assets/Projets/Portfolio.png');
         this.load.image('portfoliogamifie','assets/Projets/Caex.png');
         this.load.image('wall','assets/wall.png');
+        this.load.image('mur','assets/mur.png');
     }
 
     create ()
@@ -75,23 +76,16 @@ export default class MainScene extends Phaser.Scene
         this.add.image(1000, 600, 'sky').setScale(2.5);
 
         platforms = this.physics.add.staticGroup();
-        walls = this.add.group();
-
+        walls = this.physics.add.staticGroup();
+        
         platforms.create(1000, 1080, 'platform').setScale(5).refreshBody();
         
-        /*for (let index = 0; index < 5; index++) {
+        for (let index = 0; index < 5; index++) {
             walls.create(960,64+128*index, 'wall');
-        }*/
-
-        for (let jndex = 5; jndex < 10; jndex++) {
-            for (let index = 0; index < 5; index++)
-            {
-                let wall = this.physics.add.sprite(64+128*jndex,64+128*index, 'wall');
-                wall.body.setAllowGravity(false);
-                wall.setCollideWorldBounds(true);
-                walls.add(wall);
-            }
         }
+
+        //Phaser.Actions.PlaceOnRectangle(walls.getChildren(), new Phaser.Geom.Rectangle(64,64,1344,640));
+        //walls.refresh();
 
         this.player = new Player(this, "Joueur");
         updates.push(this.player);
@@ -106,9 +100,9 @@ export default class MainScene extends Phaser.Scene
             updates.push(sword);
         }
 
-        //this.trigger0 = new Trigger(this,"Trigger",swords,"portfolio",0.18,"https://romainschlotter.wixsite.com/portfolio",false,480,300);
+        this.trigger0 = new Trigger(this,"Trigger",swords,"portfolio",0.18,"https://romainschlotter.wixsite.com/portfolio",false,480,300);
 
-        //this.trigger1 = new Trigger(this,"Trigger",swords,"portfoliogamifie",0.18,"scene1",true,1440,300);
+        this.trigger1 = new Trigger(this,"Trigger",swords,"portfoliogamifie",0.18,"scene1",true,1440,300);
 
         //this.trigger2 = new Trigger(this,"Trigger",swords,"levelDesign",0.18,"https://romainschlotter.wixsite.com/portfolio/level-design-3d-gamekit",false,1350,300);
 
