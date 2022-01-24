@@ -1,3 +1,13 @@
+## [0.0.7] - 2022-01-24
+## Ajout
+-Mise en place d'une mécaniques de trigger.
+-Mise en place d'une sécurité sur les triggers avec un compte à rebours.
+-Mise en place de la redirection sur un trigger.
+-Mise en place du changement de scène sur un trigger.
+-Mise en place des images sur les triggers.
+## À Faire
+-Mettre en place quelques premiers puzzles.
+
 ## [0.0.6] - 2022-01-18
 ### Modification
 -Correction de la collision des épées avec le sol.

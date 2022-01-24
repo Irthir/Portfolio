@@ -1,5 +1,6 @@
 import Player from "./player.js";
 import Sword from "./sword.js";
+import Trigger from "./triggerVolume.js";
 
 var platforms
 var swords = Array();
@@ -58,12 +59,15 @@ export default class MainScene extends Phaser.Scene
         this.load.image('epee06','assets/Swords/Epee6.png');
         
         this.load.image('sky', 'assets/sky.png');
-        this.load.image('platform', 'assets/platform.png')
+        this.load.image('platform', 'assets/platform.png');
+
+        this.load.image('portfolio','assets/Projets/Portfolio.png');
+        this.load.image('levelDesign','assets/Projets/LevelDesign.png');
     }
 
     create ()
     {
-        this.scale.displaySize.setAspectRatio( 1920/1080);
+        this.scale.displaySize.setAspectRatio(1920/1080);
         this.scale.refresh();
 
         this.add.image(1000, 600, 'sky').setScale(2.5);
@@ -71,23 +75,26 @@ export default class MainScene extends Phaser.Scene
         platforms = this.physics.add.staticGroup();
 
         platforms.create(1000, 1080, 'platform').setScale(5).refreshBody();
-
-        //caex = this.physics.add.existing(new Player(this, 400, 450, 'caex')).setScale(0.2,0.2).refreshBody();
         
         this.player = new Player(this, "Joueur");
         updates.push(this.player);
-
-        //caex = this.physics.add.sprite(400,450, 'caex').setScale(0.2,0.2).refreshBody();
 
         this.physics.add.collider(this.player.getCaex(), platforms);
 
         for (let index = 0; index < 38; index++)
         {
             var x = 50+50*index;
-            var sword = new Sword(this, "sword",this.player,platforms, x, 100);
+            var sword = new Sword(this, "sword",this.player,platforms, x, 1000);
             swords.push(sword);
             updates.push(sword);
         }
+
+        this.trigger0 = new Trigger(this,"Trigger",swords,"portfolio",0.18,"https://romainschlotter.wixsite.com/portfolio",false,550,300);
+
+        this.trigger1 = new Trigger(this,"Trigger",swords,"levelDesign",0.18,"scene1",true,1350,300);
+
+        //this.trigger2 = new Trigger(this,"Trigger",swords,"levelDesign",0.18,"https://romainschlotter.wixsite.com/portfolio/level-design-3d-gamekit",false,1350,300);
+
     }
 
     update(time, delta)
@@ -97,11 +104,11 @@ export default class MainScene extends Phaser.Scene
             element.update(time, delta);
         });
         this.scale.refresh();
-        //this.loadScene1();
     }
-    
-    loadScene1()
+
+    start(url)
     {
-        this.scene.start("scene1");
+        this.scene.start(url);
     }
+
 }
