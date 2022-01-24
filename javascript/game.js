@@ -75,7 +75,7 @@ export default class MainScene extends Phaser.Scene
         this.add.image(1000, 600, 'sky').setScale(2.5);
 
         platforms = this.physics.add.staticGroup();
-        walls = this.physics.add.staticGroup();
+        walls = this.add.group();
 
         platforms.create(1000, 1080, 'platform').setScale(5).refreshBody();
         
@@ -83,11 +83,12 @@ export default class MainScene extends Phaser.Scene
             walls.create(960,64+128*index, 'wall');
         }*/
 
-
-        for (let jndex = 0; jndex < 15; jndex++) {
+        for (let jndex = 5; jndex < 10; jndex++) {
             for (let index = 0; index < 5; index++)
             {
-                walls.create(64+128*jndex,64+128*index, 'wall');
+                let wall = this.physics.add.sprite(64+128*jndex,64+128*index, 'wall');
+                wall.body.setAllowGravity(false);
+                walls.add(wall);
             }
         }
 
