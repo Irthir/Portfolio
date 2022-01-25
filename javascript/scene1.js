@@ -17,6 +17,42 @@ export default class Scene1 extends Phaser.Scene
 
     preload ()
     {
+        //Chargement Interface
+        var width = this.cameras.main.width;
+        var height = this.cameras.main.height;
+
+        var progressBar = this.add.graphics();
+        var progressBox = this.add.graphics();
+        progressBox.fillStyle(0x222222, 0.8);
+        progressBox.fillRect((width / 2)-180, (height / 2)-10, 320, 50);
+
+        this.load.on('progress', function (value) {
+            //console.log(value);
+            progressBar.clear();
+            progressBar.fillStyle(0xffffff, 1);
+            progressBar.fillRect((width / 2)-170, (height / 2), 300 * value, 30);
+        });
+                    
+        this.load.on('fileprogress', function (file) {
+            //console.log(file.src);
+        });
+        this.load.on('complete', function () {
+            progressBar.destroy();
+            progressBox.destroy();
+            loadingText.destroy();
+        });
+
+        var loadingText = this.make.text({
+            x: width / 2,
+            y: height / 2 - 50,
+            text: 'Chargement...',
+            style: {
+                font: '20px monospace',
+                fill: '#ffffff'
+            }
+        });
+        loadingText.setOrigin(0.5, 0.5);
+
         this.load.image('caex', 'assets/Knights/SeperateImages/BlueKnight_entity_000_Idle_000.png');
         this.load.image('caexIdle01', 'assets/Knights/SeperateImages/BlueKnight_entity_000_Idle_001.png');
         this.load.image('caexIdle02', 'assets/Knights/SeperateImages/BlueKnight_entity_000_Idle_002.png');
