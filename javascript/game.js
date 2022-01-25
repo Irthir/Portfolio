@@ -6,6 +6,7 @@ var platforms
 var walls
 var swords = Array();
 var updates = Array();
+var unlock = false;
 
 export default class MainScene extends Phaser.Scene
 {
@@ -172,14 +173,19 @@ export default class MainScene extends Phaser.Scene
             frameRate: 10,
             repeat: -1
         });
-        //Gestion du téléporteur
-        this.teleporter = this.add.sprite(70, 940, 'teleporter');
-        this.teleporter.setScale(2);
-        this.teleporter.anims.play('magic', true);
 
-        this.teleporter2 = this.add.sprite(1850, 940, 'teleporter');
-        this.teleporter2.setScale(2);
-        this.teleporter2.anims.play('magic', true);
+        if (unlock)
+        {
+            //Gestion du téléporteur
+            this.teleporter = this.add.sprite(70, 940, 'teleporter');
+            this.teleporter.setScale(2);
+            this.teleporter.anims.play('magic', true);
+    
+            this.teleporter2 = this.add.sprite(1850, 940, 'teleporter');
+            this.teleporter2.setScale(2);
+            this.teleporter2.anims.play('magic', true);
+
+        }
 
         this.trigger0 = new Trigger(this,"Trigger",swords,"portfolio",1,"https://romainschlotter.wixsite.com/portfolio",false,480,300);
 
@@ -195,14 +201,17 @@ export default class MainScene extends Phaser.Scene
         });
         this.scale.refresh();
         
-        let rayon = 15;
-        if (this.player.getCaex().x <= this.teleporter.x+rayon && this.player.getCaex().x >= this.teleporter.x-rayon )
+        if (unlock && this.teleporter!=null)
         {
-            this.teleportation(1);
-        }
-        else if (this.player.getCaex().x <= this.teleporter2.x+rayon && this.player.getCaex().x >= this.teleporter2.x-rayon )
-        {
-            this.teleportation(2);
+            let rayon = 15;
+            if (this.player.getCaex().x <= this.teleporter.x+rayon && this.player.getCaex().x >= this.teleporter.x-rayon )
+            {
+                this.teleportation(1);
+            }
+            else if (this.player.getCaex().x <= this.teleporter2.x+rayon && this.player.getCaex().x >= this.teleporter2.x-rayon )
+            {
+                this.teleportation(2);
+            }
         }
     }
 
@@ -211,6 +220,7 @@ export default class MainScene extends Phaser.Scene
         this.resetScene();
         this.player.resetPlayer();
         this.scene.start(url);
+        unlock = true;
     }
 
     resetScene()
