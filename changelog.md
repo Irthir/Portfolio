@@ -6,6 +6,7 @@
 -Ajout de deux épées pour en fait huit.
 -Ajout du deuxième et troisième puzzle pour les projets Level Design et CEREST.
 -Ajout du niveau libre.
+-Ajout de l'écran de chargement.
 
 ## [0.0.7] - 2022-01-24
 ## Ajout
