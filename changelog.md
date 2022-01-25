@@ -1,3 +1,8 @@
+## [0.0.8] - 2022-01-25
+## Ajout
+-Correction de la taille des images des projets
+-Mise en place du premier puzzle.
+
 ## [0.0.7] - 2022-01-24
 ## Ajout
 -Mise en place d'une mécaniques de trigger.
@@ -10,6 +15,7 @@
 -Recodage des collisions entre les épées et les murs.
 ## À Faire
 -Mettre en place quelques premiers puzzles.
+-Optimiser la taille des images.
 
 ## [0.0.6] - 2022-01-18
 ### Modification

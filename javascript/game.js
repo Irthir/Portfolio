@@ -77,11 +77,24 @@ export default class MainScene extends Phaser.Scene
 
         platforms = this.physics.add.staticGroup();
         walls = this.physics.add.staticGroup();
-        
+
+        //Placement du sol
         platforms.create(1000, 1080, 'platform').setScale(5).refreshBody();
         
-        for (let index = 0; index < 5; index++) {
-            walls.create(960,64+128*index, 'wall');
+        //Placement des murs
+        for (let index = 0; index < 5; index++)
+        {
+            if (index==4)
+            {
+                for (let jndex = 0; jndex < 7; jndex++)
+                {
+                    walls.create(576+(128*jndex),64+128*index, 'wall');
+                }
+            }
+            else
+            {
+                walls.create(960,64+128*index, 'wall');
+            }
         }
 
         //Phaser.Actions.PlaceOnRectangle(walls.getChildren(), new Phaser.Geom.Rectangle(64,64,1344,640));

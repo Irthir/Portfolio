@@ -1,6 +1,6 @@
 var scale = Array(6);
 var sprite = Array(6);
-var vitesse = 600;
+var vitesse = 500;
 
 export default class Sword extends Phaser.GameObjects.GameObject
 {
