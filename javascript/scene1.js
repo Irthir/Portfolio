@@ -1,15 +1,18 @@
 import Player from "./player.js";
 import Sword from "./sword.js";
+import Trigger from "./triggerVolume.js";
 
 var platforms
+var walls
 var swords = Array();
 var updates = Array();
 
 export default class Scene1 extends Phaser.Scene
 {
-    constructor()
+    constructor(config)
     {
         super("scene1");
+        this.config = config;
     }
 
     preload ()
@@ -56,24 +59,89 @@ export default class Scene1 extends Phaser.Scene
         this.load.image('epee06','assets/Swords/Epee6.png');
         
         this.load.image('sky', 'assets/sky.png');
-        this.load.image('platform', 'assets/platform.png')
+        this.load.image('platform', 'assets/platform.png');
+
+        this.load.image('wall','assets/wall.png');
+        this.load.image('mur','assets/mur.png');
+        
+        this.load.spritesheet('teleporter','assets/MagicCircle.png',{
+            frameWidth: 128,
+            frameHeight: 128
+            });
+
+        this.load.image('cerestyoutube','assets/Projets/CerestYouTube.png');
+        
     }
 
     create ()
     {
-        this.scale.displaySize.setAspectRatio( 1920/1080);
+        this.scale.displaySize.setAspectRatio(1920/1080);
         this.scale.refresh();
 
         this.add.image(1000, 600, 'sky').setScale(2.5);
 
         platforms = this.physics.add.staticGroup();
+        walls = this.physics.add.staticGroup();
 
+        //Placement du sol
         platforms.create(1000, 1080, 'platform').setScale(5).refreshBody();
         
+        //Placement des murs
+        for (let index = 0; index < 5; index++)
+        {
+            if (index==4)
+            {
+                for (let jndex = 0; jndex < 7; jndex++)
+                {
+                    walls.create(576+(128*jndex),64+128*index, 'wall');
+                }
+            }
+            else if (index == 3 || index==2)
+            {
+                walls.create(576,64+128*index, 'wall');
+                walls.create(576+(128*6),64+128*index, 'wall');
+            }
+            else
+            {
+                walls.create(576,64+128*index, 'wall');
+
+            }
+        }
+
+        //Phaser.Actions.PlaceOnRectangle(walls.getChildren(), new Phaser.Geom.Rectangle(64,64,1344,640));
+        //walls.refresh();
+
         this.player = new Player(this, "Joueur");
         updates.push(this.player);
 
         this.physics.add.collider(this.player.getCaex(), platforms);
+
+        for (let index = 2; index < 35; index++)
+        {
+            var x = 50+50*index;
+            var sword = new Sword(this, "sword",this.player,platforms, x, 1000, walls);
+            swords.push(sword);
+            updates.push(sword);
+        }
+
+        this.anims.create({
+            key: 'magic',
+            frames: this.anims.generateFrameNumbers('teleporter', { start: 0, end: 31 }),
+            frameRate: 10,
+            repeat: -1
+        });
+        //Gestion du téléporteur
+        this.teleporter = this.add.sprite(1850, 940, 'teleporter');
+        this.teleporter.setScale(2);
+        this.teleporter.anims.play('magic', true);
+
+        this.teleporter2 = this.add.sprite(70, 940, 'teleporter');
+        this.teleporter2.setScale(2);
+        this.teleporter2.anims.play('magic', true);
+
+        this.trigger1 = new Trigger(this,"Trigger",swords,"cerestyoutube",1,"https://www.youtube.com/watch?v=m7kYOQqlD8c",false,960,300);
+
+        
     }
 
     update(time, delta)
@@ -82,6 +150,47 @@ export default class Scene1 extends Phaser.Scene
         {
             element.update(time, delta);
         });
+
+
+        let rayon = 15;
+        if (this.player.getCaex().x <= this.teleporter.x+rayon && this.player.getCaex().x >= this.teleporter.x-rayon )
+        {
+            this.teleportation(1);
+        }
+        else if (this.player.getCaex().x <= this.teleporter2.x+rayon && this.player.getCaex().x >= this.teleporter2.x-rayon )
+        {
+            this.teleportation(2);
+        }
+
         this.scale.refresh();
     }
+
+    start(url)
+    {
+        this.resetScene();
+        this.player.resetPlayer();
+        this.scene.start(url);
+    }
+
+    
+    resetScene()
+    {
+        platforms = null;
+        walls = null;
+        swords = Array();
+        updates = Array();
+    }
+
+    teleportation(x)
+    {
+        if (x==2)
+        {
+            this.start("main");
+        }
+        else if (x == 1)
+        {
+            this.start("scene2");
+        }
+    }
+
 }

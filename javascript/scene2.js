@@ -7,12 +7,11 @@ var walls
 var swords = Array();
 var updates = Array();
 
-export default class MainScene extends Phaser.Scene
+export default class Scene2 extends Phaser.Scene
 {
-
     constructor(config)
     {
-        super("main");
+        super("scene2");
         this.config = config;
     }
 
@@ -58,25 +57,21 @@ export default class MainScene extends Phaser.Scene
         this.load.image('epee04','assets/Swords/Epee4.png');
         this.load.image('epee05','assets/Swords/Epee5.png');
         this.load.image('epee06','assets/Swords/Epee6.png');
-        this.load.image('epee07','assets/Swords/Epee7.png');
-        this.load.image('epee08','assets/Swords/Epee8.png');
-
-        this.load.audio("do", ["assets/Sons/do.mp3"]);
-        this.load.audio("re", ["assets/Sons/re.mp3"]);
-        this.load.audio("mi", ["assets/Sons/mi.mp3"]);
-        this.load.audio("fa", ["assets/Sons/fa.mp3"]);
-        this.load.audio("sol", ["assets/Sons/sol.mp3"]);
-        this.load.audio("la", ["assets/Sons/la.mp3"]);
-        this.load.audio("si", ["assets/Sons/si.mp3"]);
-        this.load.audio("do2", ["assets/Sons/do2.mp3"]);
         
         this.load.image('sky', 'assets/sky.png');
         this.load.image('platform', 'assets/platform.png');
 
-        this.load.image('portfolio','assets/Projets/Portfolio.png');
-        this.load.image('portfoliogamifie','assets/Projets/Caex.png');
         this.load.image('wall','assets/wall.png');
         this.load.image('mur','assets/mur.png');
+        
+        this.load.spritesheet('teleporter','assets/MagicCircle.png',{
+            frameWidth: 128,
+            frameHeight: 128
+            });
+        
+        
+        this.load.image('leveldesignitch','assets/Projets/LevelDesignItchIo.png');
+        this.load.image('leveldesignyoutube','assets/Projets/LevelDesignYouTube.png');
     }
 
     create ()
@@ -97,14 +92,27 @@ export default class MainScene extends Phaser.Scene
         {
             if (index==4)
             {
-                for (let jndex = 0; jndex < 7; jndex++)
+                for (let jndex = 0; jndex < 5; jndex++)
                 {
-                    walls.create(576+(128*jndex),64+128*index, 'wall');
+                    walls.create(192+(128*jndex),64+128*index, 'wall');
                 }
+
+                for (let jndex = 8; jndex < 13; jndex++)
+                {
+                    walls.create(192+(128*jndex),64+128*index, 'wall');
+                }
+            }
+            else if (index == 1 || index==2 || index==0)
+            {
+                walls.create(192,64+128*index, 'wall');
+
+                walls.create(960,64+128*index, 'wall');
+                walls.create(1728,64+128*index, 'wall');
             }
             else
             {
-                walls.create(960,64+128*index, 'wall');
+                walls.create(192,64+128*index, 'wall');
+                walls.create(1728,64+128*index, 'wall');
             }
         }
 
@@ -116,7 +124,7 @@ export default class MainScene extends Phaser.Scene
 
         this.physics.add.collider(this.player.getCaex(), platforms);
 
-        for (let index = 0; index < 38; index++)
+        for (let index = 2; index < 35; index++)
         {
             var x = 50+50*index;
             var sword = new Sword(this, "sword",this.player,platforms, x, 1000, walls);
@@ -124,9 +132,26 @@ export default class MainScene extends Phaser.Scene
             updates.push(sword);
         }
 
-        this.trigger0 = new Trigger(this,"Trigger",swords,"portfolio",1,"https://romainschlotter.wixsite.com/portfolio",false,480,300);
+        this.anims.create({
+            key: 'magic',
+            frames: this.anims.generateFrameNumbers('teleporter', { start: 0, end: 31 }),
+            frameRate: 10,
+            repeat: -1
+        });
+        //Gestion du téléporteur
+        this.teleporter = this.add.sprite(1850, 940, 'teleporter');
+        this.teleporter.setScale(2);
+        this.teleporter.anims.play('magic', true);
 
-        this.trigger1 = new Trigger(this,"Trigger",swords,"portfoliogamifie",1,"scene1",true,1440,300);
+        this.teleporter2 = this.add.sprite(70, 940, 'teleporter');
+        this.teleporter2.setScale(2);
+        this.teleporter2.anims.play('magic', true);
+
+        this.trigger0 = new Trigger(this,"Trigger",swords,"leveldesignitch",1,"https://irthir.itch.io/projet-conception-de-niveau",false,480,300);
+
+        this.trigger1 = new Trigger(this,"Trigger",swords,"leveldesignyoutube",1,"https://www.youtube.com/watch?v=X98Vu35kxdI",false,1440,300);
+
+        
     }
 
     update(time, delta)
@@ -135,6 +160,18 @@ export default class MainScene extends Phaser.Scene
         {
             element.update(time, delta);
         });
+
+
+        let rayon = 15;
+        if (this.player.getCaex().x <= this.teleporter.x+rayon && this.player.getCaex().x >= this.teleporter.x-rayon )
+        {
+            this.teleportation(1);
+        }
+        else if (this.player.getCaex().x <= this.teleporter2.x+rayon && this.player.getCaex().x >= this.teleporter2.x-rayon )
+        {
+            this.teleportation(2);
+        }
+
         this.scale.refresh();
     }
 
@@ -145,12 +182,25 @@ export default class MainScene extends Phaser.Scene
         this.scene.start(url);
     }
 
+    
     resetScene()
     {
         platforms = null;
         walls = null;
         swords = Array();
         updates = Array();
+    }
+
+    teleportation(x)
+    {
+        if (x==2)
+        {
+            this.start("scene1");
+        }
+        else if (x == 1)
+        {
+            console.log("scene2");
+        }
     }
 
 }

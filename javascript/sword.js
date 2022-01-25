@@ -1,6 +1,6 @@
-var scale = Array(6);
-var sprite = Array(6);
-var vitesse = 500;
+var scale = Array(8);
+var sprite = Array(8);
+var vitesse = 400;
 
 export default class Sword extends Phaser.GameObjects.GameObject
 {
@@ -10,8 +10,9 @@ export default class Sword extends Phaser.GameObjects.GameObject
     //SORTIE : La création d'un objet épée avec son sprite, ses évènements et ses collisions.
     {
         super(scene, type);
-        scale = [0.1, 0.1, 0.1, 0.04, 0.04, 0.04];
-        sprite = ['epee01','epee02','epee03','epee04','epee05','epee06'];
+        scale = [0.1, 0.1, 0.1, 0.04, 0.04, 0.04,1,1];
+        sprite = ['epee01','epee02','epee03','epee04','epee05','epee06','epee07','epee08'];
+        this.son = ['do','re','mi','fa','sol','la','si','do2'];
         this.active = true;
         this.create(scene, caex, platforms, x, y, walls);
         this.etats = ['sol','tel','vol'];
@@ -29,7 +30,7 @@ export default class Sword extends Phaser.GameObjects.GameObject
     create(scene, caex, platforms, x, y, walls)
     {
         var min = Math.ceil(0);
-        var max = Math.floor(5);
+        var max = Math.floor(7);
         var rand = Math.floor(Math.random() * (max - min +1)) + min;
     
         this.caex = caex;
@@ -53,6 +54,8 @@ export default class Sword extends Phaser.GameObjects.GameObject
         this.sword.body.isCircle = true;
 
         this.scene.physics.add.existing(this.sword);
+
+        this.ding = this.scene.sound.add(this.son[rand], {loop:false});
     }
 
     update(time,delta)
@@ -160,6 +163,8 @@ export default class Sword extends Phaser.GameObjects.GameObject
 
             this.velX = this.sword.body.velocity.x;
             this.velY = this.sword.body.velocity.y;
+
+            this.ding.play();
         }
     }
 
@@ -171,8 +176,8 @@ export default class Sword extends Phaser.GameObjects.GameObject
 
     touchWall(epee, mur)
     {
-        console.log(epee);
-        console.log(mur);
+        /*console.log(epee);
+        console.log(mur);*/
 
         let wall = this.getClosestWall(epee,mur);
 

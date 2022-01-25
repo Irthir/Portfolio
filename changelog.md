@@ -2,6 +2,10 @@
 ## Ajout
 -Correction de la taille des images des projets
 -Mise en place du premier puzzle.
+-Mise en place des sons sur les rebonds.
+-Ajout de deux épées pour en fait huit.
+-Ajout du deuxième et troisième puzzle pour les projets Level Design et CEREST.
+-Ajout du niveau libre.
 
 ## [0.0.7] - 2022-01-24
 ## Ajout

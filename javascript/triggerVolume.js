@@ -27,8 +27,8 @@ export default class Trigger extends Phaser.GameObjects.GameObject
             this.overlap = this.scene.physics.add.overlap(this.trigger, sword.getSword(), this.onTrigger.bind(this, this.trigger, sword));    
         });        
         
-        console.log(this.getbScene());
-        console.log(this.getUrl());
+        /*console.log(this.getbScene());
+        console.log(this.getUrl());*/
         //this.onTrigger();
         
         //this.trigger.body.setAllowGravity(false);
@@ -54,7 +54,7 @@ export default class Trigger extends Phaser.GameObjects.GameObject
         {
             if (this.bScene)
             {
-                console.log(this.scene);
+                //console.log(this.scene);
                 this.scene.start(this.url);
             }
             else

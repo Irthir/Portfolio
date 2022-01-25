@@ -4,7 +4,7 @@ var cursors;
 var caex;
 var epees = Array();
 var positions = Array();
-var nbEpee = 21;
+var nbEpee = 27;
 var vitesse = 300;
 
 export default class Player extends Phaser.GameObjects.GameObject
@@ -77,37 +77,45 @@ export default class Player extends Phaser.GameObjects.GameObject
             repeat: 1
         });
 
-        for (let i = 0; i < (nbEpee/7); i++)
+        for (let i = 0; i < (nbEpee/9); i++)
         {
-            for (let j = 0; j < 7; j++)
+            for (let j = 0; j < 9; j++)
             {
                 var x=0;
                 var y=0;
                 switch (j)
                 {
                     case 0:
-                        x=-75;
-                        y=-75;
+                        x=-68;
+                        y=-60;
                         break;
                     case 1:
-                        x=-50;
-                        y=-50;
+                        x=-51;
+                        y=-45;
                         break;
                     case 2:
-                        x=-25;
-                        y=-25;
+                        x=-34;
+                        y=-30;
                         break;
-                    case 4:
-                        x=25;
-                        y=-25;
+                    case 3:
+                        x=-17;
+                        y=-15;
                         break;
                     case 5:
-                        x=50;
-                        y=-50;
+                        x=17;
+                        y=-15;
                         break;
                     case 6:
-                        x=75;
-                        y=-75;
+                        x=34;
+                        y=-30;
+                        break;
+                    case 7:
+                        x=51;
+                        y=-45;
+                        break;
+                    case 8:
+                        x=68;
+                        y=-60;
                         break;
                     default:
                         x=0;
@@ -208,5 +216,15 @@ export default class Player extends Phaser.GameObjects.GameObject
             if (epees.length>0)
                 epees[epees.length-1].setActif(true);
         }
+    }
+
+    resetPlayer()
+    {
+        cursors;
+        caex;
+        epees = Array();
+        positions = Array();
+        nbEpee = 27;
+        vitesse = 300;
     }
 }

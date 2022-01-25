@@ -1,6 +1,8 @@
 // Index.js:
 import MainScene from "./game.js";
 import Scene1 from "./scene1.js";
+import Scene2 from "./scene2.js";
+import SceneJeu from "./scenejeu.js";
 
 var config, game;
 function init()
@@ -13,10 +15,10 @@ function init()
     physics: {
         default: 'arcade',
         arcade: {
-            debug : true
+            //debug : true
         }
     },
-    scene: [MainScene, Scene1],
+    scene: [MainScene, Scene1, Scene2, SceneJeu],
     scale: {mode: Phaser.Scale.FIT}
     };
 
