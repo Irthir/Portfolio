@@ -28,14 +28,14 @@ export default class MainScene extends Phaser.Scene
         progressBox.fillRect((width / 2)-180, (height / 2)-10, 320, 50);
 
         this.load.on('progress', function (value) {
-            console.log(value);
+            //console.log(value);
             progressBar.clear();
             progressBar.fillStyle(0xffffff, 1);
             progressBar.fillRect((width / 2)-170, (height / 2), 300 * value, 30);
         });
                     
         this.load.on('fileprogress', function (file) {
-            console.log(file.src);
+            //console.log(file.src);
         });
         this.load.on('complete', function () {
             progressBar.destroy();
@@ -113,7 +113,6 @@ export default class MainScene extends Phaser.Scene
         this.load.image('portfolio','assets/Projets/Portfolio.png');
         this.load.image('portfoliogamifie','assets/Projets/Caex.png');
         this.load.image('wall','assets/wall.png');
-        this.load.image('mur','assets/mur.png');
     }
 
     create ()

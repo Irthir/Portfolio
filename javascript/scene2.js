@@ -62,7 +62,6 @@ export default class Scene2 extends Phaser.Scene
         this.load.image('platform', 'assets/platform.png');
 
         this.load.image('wall','assets/wall.png');
-        this.load.image('mur','assets/mur.png');
         
         this.load.spritesheet('teleporter','assets/MagicCircle.png',{
             frameWidth: 128,
