@@ -99,17 +99,28 @@ export default class MainScene extends Phaser.Scene
         this.load.image('epee07','assets/Swords/Epee7.png');
         this.load.image('epee08','assets/Swords/Epee8.png');
 
-        this.load.audio("do", ["assets/Sons/do.mp3"]);
+        /*this.load.audio("do", ["assets/Sons/do.mp3"]);
         this.load.audio("re", ["assets/Sons/re.mp3"]);
         this.load.audio("mi", ["assets/Sons/mi.mp3"]);
         this.load.audio("fa", ["assets/Sons/fa.mp3"]);
         this.load.audio("sol", ["assets/Sons/sol.mp3"]);
         this.load.audio("la", ["assets/Sons/la.mp3"]);
         this.load.audio("si", ["assets/Sons/si.mp3"]);
-        this.load.audio("do2", ["assets/Sons/do2.mp3"]);
+        this.load.audio("do2", ["assets/Sons/do2.mp3"]);*/
+
+        this.load.audio("do", ["assets/Sons/do.ogg"]);
+        this.load.audio("re", ["assets/Sons/re.ogg"]);
+        this.load.audio("mi", ["assets/Sons/mi.ogg"]);
+        this.load.audio("fa", ["assets/Sons/fa.ogg"]);
+        this.load.audio("sol", ["assets/Sons/sol.ogg"]);
+        this.load.audio("la", ["assets/Sons/la.ogg"]);
+        this.load.audio("si", ["assets/Sons/si.ogg"]);
+        this.load.audio("do2", ["assets/Sons/do2.ogg"]);
         
         this.load.image('sky', 'assets/sky.png');
+        this.load.image('cave', 'assets/cave.png');
         this.load.image('platform', 'assets/platform.png');
+        this.load.image('ground', 'assets/stone.png');
 
         this.load.spritesheet('teleporter','assets/MagicCircle.png',{
             frameWidth: 128,
@@ -126,20 +137,19 @@ export default class MainScene extends Phaser.Scene
         this.scale.displaySize.setAspectRatio(1920/1080);
         this.scale.refresh();
 
-        this.add.image(1000, 600, 'sky').setScale(2.5);
+        this.add.image(960, 540, 'cave').setScale(2);
 
         platforms = this.physics.add.staticGroup();
         walls = this.physics.add.staticGroup();
 
-        //Placement du sol
-        platforms.create(1000, 1080, 'platform').setScale(5).refreshBody();
+        
         
         //Placement des murs
         for (let index = 0; index < 5; index++)
         {
             if (index==4)
             {
-                for (let jndex = 3; jndex < 4; jndex++)
+                for (let jndex = 2; jndex < 5; jndex++)
                 {
                     walls.create(576+(128*jndex),64+128*index, 'wall');
                 }
@@ -166,6 +176,13 @@ export default class MainScene extends Phaser.Scene
             updates.push(sword);
         }
 
+        //Placement du sol
+        for (let index = 0; index < 25; index++)
+        {
+            platforms.create(41+82*index, 1044, 'ground').setScale(1).refreshBody();
+            
+        }
+
 
         this.anims.create({
             key: 'magic',
@@ -190,7 +207,6 @@ export default class MainScene extends Phaser.Scene
         this.trigger0 = new Trigger(this,"Trigger",swords,"portfolio",1,"https://romainschlotter.wixsite.com/portfolio",false,480,300);
 
         this.trigger1 = new Trigger(this,"Trigger",swords,"portfoliogamifie",1,"scene1",true,1440,300);
-        
     }
 
     update(time, delta)

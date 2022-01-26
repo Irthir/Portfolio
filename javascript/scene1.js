@@ -95,7 +95,9 @@ export default class Scene1 extends Phaser.Scene
         this.load.image('epee06','assets/Swords/Epee6.png');
         
         this.load.image('sky', 'assets/sky.png');
+        this.load.image('cave', 'assets/cave.png');
         this.load.image('platform', 'assets/platform.png');
+        this.load.image('ground', 'assets/stone.png');
 
         this.load.image('wall','assets/wall.png');
         
@@ -113,13 +115,12 @@ export default class Scene1 extends Phaser.Scene
         this.scale.displaySize.setAspectRatio(1920/1080);
         this.scale.refresh();
 
-        this.add.image(1000, 600, 'sky').setScale(2.5);
+        this.add.image(960, 540, 'cave').setScale(2);
 
         platforms = this.physics.add.staticGroup();
         walls = this.physics.add.staticGroup();
 
-        //Placement du sol
-        platforms.create(1000, 1080, 'platform').setScale(5).refreshBody();
+        
         
         //Placement des murs
         for (let index = 0; index < 5; index++)
@@ -157,6 +158,13 @@ export default class Scene1 extends Phaser.Scene
             var sword = new Sword(this, "sword",this.player,platforms, x, 1000, walls);
             swords.push(sword);
             updates.push(sword);
+        }
+
+        //Placement du sol
+        for (let index = 0; index < 25; index++)
+        {
+            platforms.create(41+82*index, 1044, 'ground').setScale(1).refreshBody();
+            
         }
 
         this.anims.create({
