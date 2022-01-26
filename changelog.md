@@ -1,3 +1,9 @@
+## [0.0.9] - 2022-01-26
+## Ajout
+-Mise en place des textes sur les images.
+-Présentation des projets.
+-Conception du voyage rapide entre les scènes.
+
 ## [0.0.8] - 2022-01-25
 ## Ajout
 -Correction de la taille des images des projets

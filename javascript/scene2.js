@@ -190,9 +190,9 @@ export default class Scene2 extends Phaser.Scene
         this.teleporter2.setScale(2);
         this.teleporter2.anims.play('magic', true);
 
-        this.trigger0 = new Trigger(this,"Trigger",swords,"leveldesignitch",1,"https://irthir.itch.io/projet-conception-de-niveau",false,480,300);
+        this.trigger0 = new Trigger(this,"Trigger",swords,"leveldesignitch",1,"https://irthir.itch.io/projet-conception-de-niveau",false,520,260, "Conception de Niveau, Itch.io");
 
-        this.trigger1 = new Trigger(this,"Trigger",swords,"leveldesignyoutube",1,"https://www.youtube.com/watch?v=X98Vu35kxdI",false,1440,300);
+        this.trigger1 = new Trigger(this,"Trigger",swords,"leveldesignyoutube",1,"https://www.youtube.com/watch?v=X98Vu35kxdI",false,1400,260, "Conception de Niveau, YouTube");
 
         
     }

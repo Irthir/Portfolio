@@ -182,7 +182,7 @@ export default class Scene1 extends Phaser.Scene
         this.teleporter2.setScale(2);
         this.teleporter2.anims.play('magic', true);
 
-        this.trigger1 = new Trigger(this,"Trigger",swords,"cerestyoutube",1,"https://www.youtube.com/watch?v=m7kYOQqlD8c",false,960,300);
+        this.trigger1 = new Trigger(this,"Trigger",swords,"cerestyoutube",1,"https://www.youtube.com/watch?v=m7kYOQqlD8c",false,960,260,"Réalité Virtuelle UE4, YouTube");
 
         
     }

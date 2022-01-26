@@ -25,18 +25,6 @@ function init()
     game = new Phaser.Game(config);
 }
 
-function loadScene(url)
-{
-    console.log("start "+ url);
-    game.start(url);
-}
-
-
 // Prevent right click menu from showing because it is annoying
 //document.addEventListener('contextmenu', event => event.preventDefault());
 init();
-for (let index = 0; index < 30; index++)
-{
-    console.log(game.scene.scenes[index]);
-}
-//loadScene("scene1");

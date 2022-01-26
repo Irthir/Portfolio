@@ -197,16 +197,18 @@ export default class MainScene extends Phaser.Scene
             this.teleporter = this.add.sprite(70, 940, 'teleporter');
             this.teleporter.setScale(2);
             this.teleporter.anims.play('magic', true);
+            this.add.text(25,1035, "Zone de Jeu", { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize : 18});
     
             this.teleporter2 = this.add.sprite(1850, 940, 'teleporter');
             this.teleporter2.setScale(2);
             this.teleporter2.anims.play('magic', true);
+            this.add.text(1768,1035, "Portfolio Classique", { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize : 18});
 
         }
 
-        this.trigger0 = new Trigger(this,"Trigger",swords,"portfolio",1,"https://romainschlotter.wixsite.com/portfolio",false,480,300);
+        this.trigger0 = new Trigger(this,"Trigger",swords,"portfolio",1,"https://romainschlotter.wixsite.com/portfolio",false,480,260, "Portfolio Classique");
 
-        this.trigger1 = new Trigger(this,"Trigger",swords,"portfoliogamifie",1,"scene1",true,1440,300);
+        this.trigger1 = new Trigger(this,"Trigger",swords,"portfoliogamifie",1,"scene1",true,1440,260, "Portfolio Ludifié");
     }
 
     update(time, delta)

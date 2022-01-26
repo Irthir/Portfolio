@@ -2,7 +2,7 @@
 export default class Trigger extends Phaser.GameObjects.GameObject
 {
 
-    constructor (scene, type, swords, sprite, scale, url, bScene, x, y)
+    constructor (scene, type, swords, sprite, scale, url, bScene, x, y, text)
     //BUT : Créer un objet représentant une épée.
     //ENTREE : La scène, le type d'objet, le joueur, le sol et la position en x, y.
     //SORTIE : La création d'un objet épée avec son sprite, ses évènements et ses collisions.
@@ -13,12 +13,15 @@ export default class Trigger extends Phaser.GameObjects.GameObject
         this.url = url;
         this.scene = scene;
         this.bScene = bScene;
+        this.text = text;
         this.create(x, y, sprite, scale);
     }
 
     create(x, y, sprite, scale)
     {
         this.trigger = this.scene.physics.add.sprite(x,y, sprite).setScale(scale).refreshBody();
+
+        this.scene.add.text(x- (7*(this.text.length)),y+200, this.text, { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize : 32});
 
         this.bTrigger = false;
 
