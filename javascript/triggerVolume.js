@@ -21,7 +21,7 @@ export default class Trigger extends Phaser.GameObjects.GameObject
     {
         this.trigger = this.scene.physics.add.sprite(x,y, sprite).setScale(scale).refreshBody();
 
-        this.scene.add.text(x- (7*(this.text.length)),y+200, this.text, { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize : 32});
+        this.scene.add.text(x-Math.floor((7*(this.text.length))*scale),y+Math.floor(200*scale), this.text, { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize : Math.floor(32*scale)});
 
         this.bTrigger = false;
 
@@ -30,11 +30,6 @@ export default class Trigger extends Phaser.GameObjects.GameObject
             this.overlap = this.scene.physics.add.overlap(this.trigger, sword.getSword(), this.onTrigger.bind(this, this.trigger, sword));    
         });        
         
-        /*console.log(this.getbScene());
-        console.log(this.getUrl());*/
-        //this.onTrigger();
-        
-        //this.trigger.body.setAllowGravity(false);
 
         this.scene.physics.add.existing(this.trigger);
     }
@@ -53,21 +48,24 @@ export default class Trigger extends Phaser.GameObjects.GameObject
     
     onTrigger(trigger, sword)
     {
-        if (this.bTrigger==false)
+        if (sword.etat=="vol")
         {
-            if (this.bScene)
+            if (this.bTrigger==false)
             {
-                //console.log(this.scene);
-                this.scene.start(this.url);
+                if (this.bScene)
+                {
+                    //console.log(this.scene);
+                    this.scene.start(this.url);
+                }
+                else
+                {
+                    window.open(this.url, '_blank');
+                }
+                this.bTrigger = true;
+                this.resetTrigger();
             }
-            else
-            {
-                window.open(this.url, '_blank');
-            }
-            this.bTrigger = true;
-            this.resetTrigger();
+            sword.resetSword();
         }
-        sword.resetSword();
     }
 
     async resetTrigger() {

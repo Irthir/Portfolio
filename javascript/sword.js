@@ -13,6 +13,8 @@ export default class Sword extends Phaser.GameObjects.GameObject
         scale = [0.1, 0.1, 0.1, 0.04, 0.04, 0.04,1,1];
         sprite = ['epee01','epee02','epee03','epee04','epee05','epee06','epee07','epee08'];
         this.son = ['do','re','mi','fa','sol','la','si','do2'];
+        this.music = ['music01','music06','music11','music16','music21'];
+        this.animmusic = ['animmusic01','animmusic02','animmusic03','animmusic04','animmusic05'];
         this.active = true;
         this.create(scene, caex, platforms, x, y, walls);
         this.etats = ['sol','tel','vol'];
@@ -56,6 +58,68 @@ export default class Sword extends Phaser.GameObjects.GameObject
         this.scene.physics.add.existing(this.sword);
 
         this.ding = this.scene.sound.add(this.son[rand], {loop:false});
+
+        scene.anims.create({
+            key: 'animmusic01',
+            frames: [
+                { key: 'music01', duration : 50},
+                { key: 'music02', duration : 50},
+                { key: 'music03', duration : 50},
+                { key: 'music04', duration : 50},
+                { key: 'music05', duration : 50}
+            ],
+            frameRate: 60
+        });
+
+        scene.anims.create({
+            key: 'animmusic02',
+            frames: [
+                { key: 'music06', duration : 50},
+                { key: 'music07', duration : 50},
+                { key: 'music08', duration : 50},
+                { key: 'music09', duration : 50},
+                { key: 'music10', duration : 50}
+            ],
+            frameRate: 60
+        });
+
+        scene.anims.create({
+            key: 'animmusic03',
+            frames: [
+                { key: 'music11', duration : 50},
+                { key: 'music12', duration : 50},
+                { key: 'music13', duration : 50},
+                { key: 'music14', duration : 50},
+                { key: 'music15', duration : 50}
+            ],
+            frameRate: 60
+        });
+
+        scene.anims.create({
+            key: 'animmusic04',
+            frames: [
+                { key: 'music16', duration : 50},
+                { key: 'music17', duration : 50},
+                { key: 'music18', duration : 50},
+                { key: 'music19', duration : 50},
+                { key: 'music20', duration : 50}
+            ],
+            frameRate: 60
+        });
+
+        scene.anims.create({
+            key: 'animmusic05',
+            frames: [
+                { key: 'music21', duration : 50},
+                { key: 'music22', duration : 50},
+                { key: 'music23', duration : 50},
+                { key: 'music24', duration : 50},
+                { key: 'music25', duration : 50}
+            ],
+            frameRate: 60
+        });
+
+        this.effect=null;
     }
 
     update(time,delta)
@@ -165,6 +229,21 @@ export default class Sword extends Phaser.GameObjects.GameObject
             this.velY = this.sword.body.velocity.y;
 
             this.ding.play();
+
+            let min = Math.ceil(0);
+            let max = Math.floor(4);
+            let rand = Math.floor(Math.random() * (max - min +1)) + min;
+
+            console.log(rand);
+            if (this.effect==null)
+            {
+                this.effect = this.scene.physics.add.sprite(this.sword.x-40,this.sword.y-40, this.music[rand]).setScale(0.5).refreshBody();
+                this.effect.play(this.animmusic[rand],false);
+                this.effect.once('animationcomplete', () => {
+                    this.effect.destroy();
+                    this.effect=null;
+                })
+            }
         }
     }
 

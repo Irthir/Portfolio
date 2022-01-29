@@ -2,7 +2,9 @@
 import MainScene from "./game.js";
 import Scene1 from "./scene1.js";
 import Scene2 from "./scene2.js";
+import Scene3 from "./scene3.js";
 import SceneJeu from "./scenejeu.js";
+import SceneLien from "./scenelien.js";
 
 var config, game;
 function init()
@@ -18,7 +20,7 @@ function init()
             //debug : true
         }
     },
-    scene: [MainScene, Scene1, Scene2, SceneJeu],
+    scene: [MainScene, Scene1, Scene2, Scene3, SceneJeu, SceneLien],
     scale: {mode: Phaser.Scale.FIT}
     };
 

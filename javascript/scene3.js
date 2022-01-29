@@ -7,11 +7,11 @@ var walls
 var swords = Array();
 var updates = Array();
 
-export default class Scene2 extends Phaser.Scene
+export default class Scene3 extends Phaser.Scene
 {
     constructor(config)
     {
-        super("scene2");
+        super("scene3");
         this.config = config;
     }
 
@@ -20,7 +20,7 @@ export default class Scene2 extends Phaser.Scene
         //Chargement Interface
         var width = this.cameras.main.width;
         var height = this.cameras.main.height;
-        
+
         var progressBar = this.add.graphics();
         var progressBox = this.add.graphics();
         progressBox.fillStyle(0x222222, 0.8);
@@ -142,10 +142,9 @@ export default class Scene2 extends Phaser.Scene
             frameWidth: 128,
             frameHeight: 128
             });
-        
-        
-        this.load.image('leveldesignitch','assets/Projets/LevelDesignItchIo.png');
-        this.load.image('leveldesignyoutube','assets/Projets/LevelDesignYouTube.png');
+
+
+        this.load.image('tutorielitch','assets/Projets/TutorielItchIo.png');
         this.load.image('accueil','assets/Projets/Caex.png');
     }
 
@@ -166,32 +165,22 @@ export default class Scene2 extends Phaser.Scene
         {
             if (index==4)
             {
-                for (let jndex = 0; jndex < 5; jndex++)
+                for (let jndex = 0; jndex < 7; jndex++)
                 {
-                    walls.create(192+(128*jndex),64+128*index, 'wall');
-                }
-
-                for (let jndex = 8; jndex < 13; jndex++)
-                {
-                    walls.create(192+(128*jndex),64+128*index, 'wall');
+                    walls.create(576+(128*jndex),64+128*index, 'wall');
                 }
             }
-            else if (index == 1 || index==2 || index==0)
+            else if (index == 3 || index==2)
             {
-                walls.create(192,64+128*index, 'wall');
-
-                walls.create(960,64+128*index, 'wall');
-                walls.create(1728,64+128*index, 'wall');
+                walls.create(576,64+128*index, 'wall');
+                walls.create(576+(128*6),64+128*index, 'wall');
             }
             else
             {
-                walls.create(192,64+128*index, 'wall');
-                walls.create(1728,64+128*index, 'wall');
+                walls.create(576+(128*6),64+128*index, 'wall');
+
             }
         }
-
-        //Phaser.Actions.PlaceOnRectangle(walls.getChildren(), new Phaser.Geom.Rectangle(64,64,1344,640));
-        //walls.refresh();
 
         this.player = new Player(this, "Joueur");
         updates.push(this.player);
@@ -223,16 +212,14 @@ export default class Scene2 extends Phaser.Scene
         this.teleporter = this.add.sprite(1850, 940, 'teleporter');
         this.teleporter.setScale(2);
         this.teleporter.anims.play('magic', true);
-        this.add.text(15,1035, "Réalité Virtuelle", { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize : 18});
+        this.add.text(10,1035, "Conception de Niveau", { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize : 18});
 
         this.teleporter2 = this.add.sprite(70, 940, 'teleporter');
         this.teleporter2.setScale(2);
         this.teleporter2.anims.play('magic', true);
-        this.add.text(1800,1035, "Projet Tutoriel", { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize : 18});
+        this.add.text(1778,1035, "Curriculum Vitae", { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize : 18});
 
-        this.trigger0 = new Trigger(this,"Trigger",swords,"leveldesignitch",1,"https://irthir.itch.io/projet-conception-de-niveau",false,520,260, "Conception de Niveau, Itch.io");
-
-        this.trigger1 = new Trigger(this,"Trigger",swords,"leveldesignyoutube",1,"https://www.youtube.com/watch?v=X98Vu35kxdI",false,1400,260, "Conception de Niveau, YouTube");
+        this.trigger1 = new Trigger(this,"Trigger",swords,"tutorielitch",1,"https://irthir.itch.io/caex-la-voie-de-la-tlkninsie",false,960,260,"Projet Tutoriel, Itch.io");
 
         
         this.trigger10 = new Trigger(this,"Trigger",swords,"accueil",0.4,"main",true,1830,740, "Accueil");
@@ -279,11 +266,11 @@ export default class Scene2 extends Phaser.Scene
     {
         if (x==2)
         {
-            this.start("scene1");
+            this.start("scene2");
         }
         else if (x == 1)
         {
-            this.start("scene3");
+            this.start("scenelien");
         }
     }
 

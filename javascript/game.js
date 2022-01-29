@@ -99,14 +99,31 @@ export default class MainScene extends Phaser.Scene
         this.load.image('epee07','assets/Swords/Epee7.png');
         this.load.image('epee08','assets/Swords/Epee8.png');
 
-        /*this.load.audio("do", ["assets/Sons/do.mp3"]);
-        this.load.audio("re", ["assets/Sons/re.mp3"]);
-        this.load.audio("mi", ["assets/Sons/mi.mp3"]);
-        this.load.audio("fa", ["assets/Sons/fa.mp3"]);
-        this.load.audio("sol", ["assets/Sons/sol.mp3"]);
-        this.load.audio("la", ["assets/Sons/la.mp3"]);
-        this.load.audio("si", ["assets/Sons/si.mp3"]);
-        this.load.audio("do2", ["assets/Sons/do2.mp3"]);*/
+        this.load.image('music01','assets/Effets/Music_01.png');
+        this.load.image('music02','assets/Effets/Music_02.png');
+        this.load.image('music03','assets/Effets/Music_03.png');
+        this.load.image('music04','assets/Effets/Music_04.png');
+        this.load.image('music05','assets/Effets/Music_05.png');
+        this.load.image('music06','assets/Effets/Music_06.png');
+        this.load.image('music07','assets/Effets/Music_07.png');
+        this.load.image('music08','assets/Effets/Music_08.png');
+        this.load.image('music09','assets/Effets/Music_09.png');
+        this.load.image('music10','assets/Effets/Music_10.png');
+        this.load.image('music11','assets/Effets/Music_11.png');
+        this.load.image('music12','assets/Effets/Music_12.png');
+        this.load.image('music13','assets/Effets/Music_13.png');
+        this.load.image('music14','assets/Effets/Music_14.png');
+        this.load.image('music15','assets/Effets/Music_15.png');
+        this.load.image('music16','assets/Effets/Music_16.png');
+        this.load.image('music17','assets/Effets/Music_17.png');
+        this.load.image('music18','assets/Effets/Music_18.png');
+        this.load.image('music19','assets/Effets/Music_19.png');
+        this.load.image('music20','assets/Effets/Music_20.png');
+        this.load.image('music21','assets/Effets/Music_21.png');
+        this.load.image('music22','assets/Effets/Music_22.png');
+        this.load.image('music23','assets/Effets/Music_23.png');
+        this.load.image('music24','assets/Effets/Music_24.png');
+        this.load.image('music25','assets/Effets/Music_25.png');
 
         this.load.audio("do", ["assets/Sons/do.ogg"]);
         this.load.audio("re", ["assets/Sons/re.ogg"]);
@@ -130,6 +147,15 @@ export default class MainScene extends Phaser.Scene
         this.load.image('portfolio','assets/Projets/Portfolio.png');
         this.load.image('portfoliogamifie','assets/Projets/Caex.png');
         this.load.image('wall','assets/wall.png');
+
+        this.load.image('mouse','assets/Inputs/Mouse.png');
+        this.load.image('left','assets/Inputs/Left.png');
+        this.load.image('right','assets/Inputs/Right.png');
+
+        this.load.image('leveldesign','assets/Projets/LevelDesign.png');
+        this.load.image('cerest','assets/Projets/Cerest.png');
+        this.load.image('tutoriel','assets/Projets/Tutoriel.png');
+        this.load.image('cv','assets/Projets/CV.png');
     }
 
     create ()
@@ -160,9 +186,6 @@ export default class MainScene extends Phaser.Scene
             }
         }
 
-        //Phaser.Actions.PlaceOnRectangle(walls.getChildren(), new Phaser.Geom.Rectangle(64,64,1344,640));
-        //walls.refresh();
-
         this.player = new Player(this, "Joueur");
         updates.push(this.player);
 
@@ -183,7 +206,6 @@ export default class MainScene extends Phaser.Scene
             
         }
 
-
         this.anims.create({
             key: 'magic',
             frames: this.anims.generateFrameNumbers('teleporter', { start: 0, end: 31 }),
@@ -197,18 +219,33 @@ export default class MainScene extends Phaser.Scene
             this.teleporter = this.add.sprite(70, 940, 'teleporter');
             this.teleporter.setScale(2);
             this.teleporter.anims.play('magic', true);
-            this.add.text(25,1035, "Zone de Jeu", { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize : 18});
+            this.add.text(25,1035, "Zone de jeu", { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize : 18});
     
             this.teleporter2 = this.add.sprite(1850, 940, 'teleporter');
             this.teleporter2.setScale(2);
             this.teleporter2.anims.play('magic', true);
-            this.add.text(1768,1035, "Portfolio Classique", { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize : 18});
+            this.add.text(1780,1035, "Portfolio Ludifié", { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize : 18});
+
+            
+            this.trigger2 = new Trigger(this,"Trigger",swords,"cerest",0.4,"scene1",true,1830,540, "Réalité Virtuelle");
+            this.trigger3 = new Trigger(this,"Trigger",swords,"leveldesign",0.4,"scene2",true,1830,740, "Conception de niveau");
+
+            
+            this.trigger4 = new Trigger(this,"Trigger",swords,"cv",0.4,"scenelien",true,90,540, "Curriculum Vitae");
+            this.trigger5 = new Trigger(this,"Trigger",swords,"tutoriel",0.4,"scene3",true,90,740, "Projet Tutoriel");
 
         }
 
         this.trigger0 = new Trigger(this,"Trigger",swords,"portfolio",1,"https://romainschlotter.wixsite.com/portfolio",false,480,260, "Portfolio Classique");
 
         this.trigger1 = new Trigger(this,"Trigger",swords,"portfoliogamifie",1,"scene1",true,1440,260, "Portfolio Ludifié");
+
+        this.add.sprite(960, 580, 'mouse');
+        this.add.sprite(840, 580, 'left');
+        this.add.sprite(1080, 580, 'right');
+
+        //Outil de debug
+        //this.start("scene3");
     }
 
     update(time, delta)
@@ -251,13 +288,13 @@ export default class MainScene extends Phaser.Scene
 
     teleportation(x)
     {
-        if (x == 1)
-        {
-            this.start("scenejeu");
-        } 
-        else if (x == 2)
+        if (x == 2)
         {
             this.start("scene1");
+        } 
+        else if (x == 1)
+        {
+            this.start("scenejeu");
         }
     }
 

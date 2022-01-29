@@ -7,11 +7,11 @@ var walls
 var swords = Array();
 var updates = Array();
 
-export default class Scene2 extends Phaser.Scene
+export default class SceneLien extends Phaser.Scene
 {
     constructor(config)
     {
-        super("scene2");
+        super("scenelien");
         this.config = config;
     }
 
@@ -144,9 +144,9 @@ export default class Scene2 extends Phaser.Scene
             });
         
         
-        this.load.image('leveldesignitch','assets/Projets/LevelDesignItchIo.png');
-        this.load.image('leveldesignyoutube','assets/Projets/LevelDesignYouTube.png');
-        this.load.image('accueil','assets/Projets/Caex.png');
+        this.load.image('cv','assets/Projets/CV.png');
+        this.load.image('github','assets/Projets/Github.png');
+        this.load.image('unity','assets/Projets/BadgeUnity.png');
     }
 
     create ()
@@ -166,27 +166,20 @@ export default class Scene2 extends Phaser.Scene
         {
             if (index==4)
             {
-                for (let jndex = 0; jndex < 5; jndex++)
+                for (let jndex = 1; jndex < 3; jndex++)
                 {
                     walls.create(192+(128*jndex),64+128*index, 'wall');
                 }
 
-                for (let jndex = 8; jndex < 13; jndex++)
+                for (let jndex = 6; jndex < 7; jndex++)
                 {
                     walls.create(192+(128*jndex),64+128*index, 'wall');
                 }
-            }
-            else if (index == 1 || index==2 || index==0)
-            {
-                walls.create(192,64+128*index, 'wall');
 
-                walls.create(960,64+128*index, 'wall');
-                walls.create(1728,64+128*index, 'wall');
-            }
-            else
-            {
-                walls.create(192,64+128*index, 'wall');
-                walls.create(1728,64+128*index, 'wall');
+                for (let jndex = 10; jndex < 12; jndex++)
+                {
+                    walls.create(192+(128*jndex),64+128*index, 'wall');
+                }
             }
         }
 
@@ -223,16 +216,18 @@ export default class Scene2 extends Phaser.Scene
         this.teleporter = this.add.sprite(1850, 940, 'teleporter');
         this.teleporter.setScale(2);
         this.teleporter.anims.play('magic', true);
-        this.add.text(15,1035, "Réalité Virtuelle", { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize : 18});
+        this.add.text(15,1035, "Projet Tutoriel", { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize : 18});
 
         this.teleporter2 = this.add.sprite(70, 940, 'teleporter');
         this.teleporter2.setScale(2);
         this.teleporter2.anims.play('magic', true);
-        this.add.text(1800,1035, "Projet Tutoriel", { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize : 18});
+        this.add.text(1808,1035, "Zone de Jeu", { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize : 18});
 
-        this.trigger0 = new Trigger(this,"Trigger",swords,"leveldesignitch",1,"https://irthir.itch.io/projet-conception-de-niveau",false,520,260, "Conception de Niveau, Itch.io");
+        this.trigger0 = new Trigger(this,"Trigger",swords,"unity",1,"https://www.credly.com/badges/71136ca5-9769-4db6-976c-58a551be402e/public_url",false,380,260, "Certification Unity");
 
-        this.trigger1 = new Trigger(this,"Trigger",swords,"leveldesignyoutube",1,"https://www.youtube.com/watch?v=X98Vu35kxdI",false,1400,260, "Conception de Niveau, YouTube");
+        this.trigger1 = new Trigger(this,"Trigger",swords,"github",1,"https://github.com/Irthir",false,960,260, "Github");
+
+        this.trigger1 = new Trigger(this,"Trigger",swords,"cv",1,"./Curriculum_Vitae_Romain_S.pdf",false,1540,260, "Curriculum Vitae");
 
         
         this.trigger10 = new Trigger(this,"Trigger",swords,"accueil",0.4,"main",true,1830,740, "Accueil");
@@ -279,11 +274,11 @@ export default class Scene2 extends Phaser.Scene
     {
         if (x==2)
         {
-            this.start("scene1");
+            this.start("scene3");
         }
         else if (x == 1)
         {
-            this.start("scene3");
+            this.start("scenejeu");
         }
     }
 

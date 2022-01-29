@@ -1,11 +1,20 @@
+## [1.0.0] - 2022-01-29
+### Ajout
+-Mise en place des liens vers l'accueil.
+
+## [0.1.0] - 2022-01-28
+### Ajout
+-Mise en place des effets de musique.
+-Mise en place des informations de contrôles sur l'accueil.
+
 ## [0.0.9] - 2022-01-26
-## Ajout
+### Ajout
 -Mise en place des textes sur les images.
 -Présentation des projets.
 -Conception du voyage rapide entre les scènes.
 
 ## [0.0.8] - 2022-01-25
-## Ajout
+### Ajout
 -Correction de la taille des images des projets
 -Mise en place du premier puzzle.
 -Mise en place des sons sur les rebonds.
@@ -15,7 +24,7 @@
 -Ajout de l'écran de chargement.
 
 ## [0.0.7] - 2022-01-24
-## Ajout
+### Ajout
 -Mise en place d'une mécaniques de trigger.
 -Mise en place d'une sécurité sur les triggers avec un compte à rebours.
 -Mise en place de la redirection sur un trigger.

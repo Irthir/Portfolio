@@ -92,6 +92,43 @@ export default class SceneJeu extends Phaser.Scene
         this.load.image('epee04','assets/Swords/Epee4.png');
         this.load.image('epee05','assets/Swords/Epee5.png');
         this.load.image('epee06','assets/Swords/Epee6.png');
+        this.load.image('epee07','assets/Swords/Epee7.png');
+        this.load.image('epee08','assets/Swords/Epee8.png');
+
+        this.load.image('music01','assets/Effets/Music_01.png');
+        this.load.image('music02','assets/Effets/Music_02.png');
+        this.load.image('music03','assets/Effets/Music_03.png');
+        this.load.image('music04','assets/Effets/Music_04.png');
+        this.load.image('music05','assets/Effets/Music_05.png');
+        this.load.image('music06','assets/Effets/Music_06.png');
+        this.load.image('music07','assets/Effets/Music_07.png');
+        this.load.image('music08','assets/Effets/Music_08.png');
+        this.load.image('music09','assets/Effets/Music_09.png');
+        this.load.image('music10','assets/Effets/Music_10.png');
+        this.load.image('music11','assets/Effets/Music_11.png');
+        this.load.image('music12','assets/Effets/Music_12.png');
+        this.load.image('music13','assets/Effets/Music_13.png');
+        this.load.image('music14','assets/Effets/Music_14.png');
+        this.load.image('music15','assets/Effets/Music_15.png');
+        this.load.image('music16','assets/Effets/Music_16.png');
+        this.load.image('music17','assets/Effets/Music_17.png');
+        this.load.image('music18','assets/Effets/Music_18.png');
+        this.load.image('music19','assets/Effets/Music_19.png');
+        this.load.image('music20','assets/Effets/Music_20.png');
+        this.load.image('music21','assets/Effets/Music_21.png');
+        this.load.image('music22','assets/Effets/Music_22.png');
+        this.load.image('music23','assets/Effets/Music_23.png');
+        this.load.image('music24','assets/Effets/Music_24.png');
+        this.load.image('music25','assets/Effets/Music_25.png');
+
+        this.load.audio("do", ["assets/Sons/do.ogg"]);
+        this.load.audio("re", ["assets/Sons/re.ogg"]);
+        this.load.audio("mi", ["assets/Sons/mi.ogg"]);
+        this.load.audio("fa", ["assets/Sons/fa.ogg"]);
+        this.load.audio("sol", ["assets/Sons/sol.ogg"]);
+        this.load.audio("la", ["assets/Sons/la.ogg"]);
+        this.load.audio("si", ["assets/Sons/si.ogg"]);
+        this.load.audio("do2", ["assets/Sons/do2.ogg"]);
         
         this.load.image('sky', 'assets/sky.png');
         this.load.image('cave', 'assets/cave.png');
@@ -104,6 +141,9 @@ export default class SceneJeu extends Phaser.Scene
             frameWidth: 128,
             frameHeight: 128
             });
+
+
+        this.load.image('accueil','assets/Projets/Caex.png');
     }
 
     create ()
@@ -154,11 +194,13 @@ export default class SceneJeu extends Phaser.Scene
         this.teleporter = this.add.sprite(70, 940, 'teleporter');
         this.teleporter.setScale(2);
         this.teleporter.anims.play('magic', true);
+        this.add.text(25,1035, "Curriculum Vitae", { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize : 18});
 
         
         this.teleporter2 = this.add.sprite(1850, 940, 'teleporter');
         this.teleporter2.setScale(2);
         this.teleporter2.anims.play('magic', true);
+        this.add.text(1822,1035, "Accueil", { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize : 18});
     }
 
     update(time, delta)
@@ -202,7 +244,7 @@ export default class SceneJeu extends Phaser.Scene
     {
         if (x == 1)
         {
-            this.start("scene2");
+            this.start("scenelien");
         }
         else if (x == 2)
         {
