@@ -5,11 +5,13 @@
 -Ajout d'un message de bienvenue sur l'accueil.
 -Ajout d'un message de prévention quant aux popups sur l'accueil.
 -Changement de la couleur de fond de la page.
+-Ajout du projet manic shooter.
 
 ## [0.1.0] - 2022-01-28
 ### Ajout
 -Mise en place des effets de musique.
 -Mise en place des informations de contrôles sur l'accueil.
+-Ajout des liens vers le cv, certification unity et github.dd
 
 ## [0.0.9] - 2022-01-26
 ### Ajout

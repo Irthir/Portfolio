@@ -156,6 +156,7 @@ export default class MainScene extends Phaser.Scene
         this.load.image('cerest','assets/Projets/Cerest.png');
         this.load.image('tutoriel','assets/Projets/Tutoriel.png');
         this.load.image('cv','assets/Projets/CV.png');
+        this.load.image('astralshmup','assets/Projets/AstralManicShooter.png');
     }
 
     create ()
@@ -218,7 +219,7 @@ export default class MainScene extends Phaser.Scene
             repeat: -1
         });
 
-        if (unlock)
+        //if (unlock)
         {
             //Gestion du téléporteur
             this.teleporter = this.add.sprite(70, 940, 'teleporter');
@@ -229,10 +230,10 @@ export default class MainScene extends Phaser.Scene
             this.teleporter2 = this.add.sprite(1850, 940, 'teleporter');
             this.teleporter2.setScale(2);
             this.teleporter2.anims.play('magic', true);
-            this.add.text(1780,1035, "Portfolio Ludifié", { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize : 18});
+            this.add.text(1780,1035, "Réalité Virtuelle", { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize : 18});
 
             
-            this.trigger2 = new Trigger(this,"Trigger",swords,"cerest",0.4,"scene1",true,1830,540, "Réalité Virtuelle");
+            this.trigger2 = new Trigger(this,"Trigger",swords,"astralshmup",0.4,"scene4",true,1830,540, "Manic Shooter");
             this.trigger3 = new Trigger(this,"Trigger",swords,"leveldesign",0.4,"scene2",true,1830,740, "Conception de niveau");
 
             
@@ -250,7 +251,7 @@ export default class MainScene extends Phaser.Scene
         this.add.sprite(1080, 580, 'right');
 
         //Outil de debug
-        //this.start("scene3");
+        //this.start("scene4");
     }
 
     update(time, delta)
