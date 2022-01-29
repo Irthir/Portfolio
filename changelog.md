@@ -4,6 +4,7 @@
 -Correction du rattrapage de l'épée en vol, désormais le joueur ne peut la rattraper que si elle a déjà rebondit une fois.
 -Ajout d'un message de bienvenue sur l'accueil.
 -Ajout d'un message de prévention quant aux popups sur l'accueil.
+-Changement de la couleur de fond de la page.
 
 ## [0.1.0] - 2022-01-28
 ### Ajout
