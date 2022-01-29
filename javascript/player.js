@@ -191,15 +191,18 @@ export default class Player extends Phaser.GameObjects.GameObject
 
     addEpee(epee)
     {
-        if (epees.length<nbEpee && epee.etat!=epee.etats[1])
+        if (epee.etat!="vol" || epee.bouncecount>0)
         {
-            epees.forEach(epee =>
+            if (epees.length<nbEpee && epee.etat!=epee.etats[1])
             {
-                epee.setActif(false);    
-            });
-            epee.setEtat(1);
-            epee.setActif(true);
-            epees.push(epee);
+                epees.forEach(epee =>
+                {
+                    epee.setActif(false);    
+                });
+                epee.setEtat(1);
+                epee.setActif(true);
+                epees.push(epee);
+            }
         }
     }
 

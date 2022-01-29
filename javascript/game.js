@@ -173,7 +173,7 @@ export default class MainScene extends Phaser.Scene
         //Placement des murs
         for (let index = 0; index < 5; index++)
         {
-            if (index==4)
+            if (index==0 || index==2 || index ==4)
             {
                 for (let jndex = 2; jndex < 5; jndex++)
                 {
@@ -185,6 +185,11 @@ export default class MainScene extends Phaser.Scene
                 walls.create(960,64+128*index, 'wall');
             }
         }
+        
+        this.add.text(775,18, "             Bienvenue sur mon portfolio.\n\nJe suis Romain Schlotter et vous pouvez\ndécouvrir mon profil à travers ce site ludifié.", { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize : 19});
+
+
+        this.add.text(780,260, "Ce site ouvre des liens vers d'autres sites qui\npeuvent être bloqués comme des popups par\ncertains navigateurs.\nSi envoyer une épée sur \"Portfolio Classique\"\nn'ouvre aucune fenêtre, veuillez autoriser\nce site à ouvrir des fenêtres popups.", { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize : 18});
 
         this.player = new Player(this, "Joueur");
         updates.push(this.player);

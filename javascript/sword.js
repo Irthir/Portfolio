@@ -27,6 +27,7 @@ export default class Sword extends Phaser.GameObjects.GameObject
 
         this.originX = x;
         this.originY = y;
+        this.bouncecount = 0;
     }
 
     create(scene, caex, platforms, x, y, walls)
@@ -159,6 +160,8 @@ export default class Sword extends Phaser.GameObjects.GameObject
             this.setEtat(0);
             this.sword.setVelocity(0,0);
             //this.sword.body.setAllowGravity(false);
+            
+            this.bouncecount = 0;
         }
     }
 
@@ -186,15 +189,18 @@ export default class Sword extends Phaser.GameObjects.GameObject
         {
             //this.sword.body.setAllowGravity(true);
             this.sword.setVelocity(0, 0);
+            this.bouncecount = 0;
         }
         else if (this.etat=='tel')
         {
             //this.sword.body.setAllowGravity(false);
             this.sword.setVelocity(0, 0);
+            this.bouncecount = 0;
         }
         else if (this.etat=='vol')
         {
             //this.sword.body.setAllowGravity(false);
+            this.bouncecount = 0;
         }
     }
 
@@ -244,6 +250,8 @@ export default class Sword extends Phaser.GameObjects.GameObject
                     this.effect=null;
                 })
             }
+            
+            this.bouncecount++;
         }
     }
 
@@ -308,5 +316,7 @@ export default class Sword extends Phaser.GameObjects.GameObject
         this.setEtat(0);
         this.sword.x = this.originX;
         this.sword.y = this.originY;
+        this.sword.setRotation(0);
+        this.bouncecount=0;
     }
 }
