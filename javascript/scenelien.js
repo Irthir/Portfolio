@@ -147,6 +147,8 @@ export default class SceneLien extends Phaser.Scene
         this.load.image('cv','assets/Projets/CV.png');
         this.load.image('github','assets/Projets/Github.png');
         this.load.image('unity','assets/Projets/BadgeUnity.png');
+        
+        this.load.image('accueil','assets/Projets/Caex.png');
     }
 
     create ()
