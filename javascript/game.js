@@ -144,7 +144,7 @@ export default class MainScene extends Phaser.Scene
             frameHeight: 128
             });
 
-        this.load.image('portfolio','assets/Projets/Portfolio.png');
+        //this.load.image('portfolio','assets/Projets/Portfolio.png');
         this.load.image('portfoliogamifie','assets/Projets/Caex.png');
         this.load.image('wall','assets/wall.png');
 
@@ -157,6 +157,11 @@ export default class MainScene extends Phaser.Scene
         this.load.image('tutoriel','assets/Projets/Tutoriel.png');
         this.load.image('cv','assets/Projets/CV.png');
         this.load.image('astralshmup','assets/Projets/AstralManicShooter.png');
+
+        this.load.image('runbow','assets/Projets/Runbow.png');
+        this.load.image('saumon','assets/Projets/Saumon.png');
+        this.load.image('storig','assets/Projets/Storig.png');
+        this.load.image('paredre','assets/Projets/Paredre.png');
     }
 
     create ()
@@ -219,7 +224,7 @@ export default class MainScene extends Phaser.Scene
             repeat: -1
         });
 
-        if (unlock)
+        if (unlock || true)
         {
             //Gestion du téléporteur
             this.teleporter = this.add.sprite(70, 940, 'teleporter');
@@ -240,9 +245,14 @@ export default class MainScene extends Phaser.Scene
             this.trigger4 = new Trigger(this,"Trigger",swords,"cv",0.4,"scenelien",true,90,540, "Curriculum Vitae");
             this.trigger5 = new Trigger(this,"Trigger",swords,"tutoriel",0.4,"scene3",true,90,740, "Projet Tutoriel");
 
+            this.trigger6 = new Trigger(this,"Trigger",swords,"runbow",0.4,"scene5",true,90,340, "Hippo Runbow");
+            this.trigger7 = new Trigger(this,"Trigger",swords,"saumon",0.4,"scene6",true,90,140, "O.C.T.O.P.U.S.");
+            this.trigger8 = new Trigger(this,"Trigger",swords,"storig",0.4,"scene7",true,340,100, "De Storig Kaschte");
+            this.trigger9 = new Trigger(this,"Trigger",swords,"paredre",0.4,"scene8",true,540,100, "Paredre");
+
         }
 
-        this.trigger0 = new Trigger(this,"Trigger",swords,"portfolio",1,"https://romainschlotter.wixsite.com/portfolio",false,480,260, "Portfolio Classique");
+        //this.trigger0 = new Trigger(this,"Trigger",swords,"portfolio",1,"https://romainschlotter.wixsite.com/portfolio",false,480,260, "Portfolio Classique");
 
         this.trigger1 = new Trigger(this,"Trigger",swords,"portfoliogamifie",1,"scene1",true,1440,260, "Portfolio Ludifié");
 

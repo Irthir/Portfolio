@@ -217,7 +217,7 @@ export default class Scene4 extends Phaser.Scene
         this.teleporter2 = this.add.sprite(70, 940, 'teleporter');
         this.teleporter2.setScale(2);
         this.teleporter2.anims.play('magic', true);
-        this.add.text(1778,1035, "Curriculum Vitae", { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize : 18});
+        this.add.text(1778,1035, "Hippo Runbow", { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize : 18});
 
         this.trigger1 = new Trigger(this,"Trigger",swords,"astralshmupitch",1,"https://irthir.itch.io/astral-manic-shooter",false,960,260,"Projet Manic Shooter, Itch.io");
 
@@ -270,7 +270,7 @@ export default class Scene4 extends Phaser.Scene
         }
         else if (x == 1)
         {
-            this.start("scenelien");
+            this.start("scene5");
         }
     }
 

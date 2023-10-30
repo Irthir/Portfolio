@@ -7,11 +7,11 @@ var walls
 var swords = Array();
 var updates = Array();
 
-export default class SceneLien extends Phaser.Scene
+export default class Scene6 extends Phaser.Scene
 {
     constructor(config)
     {
-        super("scenelien");
+        super("scene6");
         this.config = config;
     }
 
@@ -20,7 +20,7 @@ export default class SceneLien extends Phaser.Scene
         //Chargement Interface
         var width = this.cameras.main.width;
         var height = this.cameras.main.height;
-        
+
         var progressBar = this.add.graphics();
         var progressBox = this.add.graphics();
         progressBox.fillStyle(0x222222, 0.8);
@@ -82,6 +82,7 @@ export default class SceneLien extends Phaser.Scene
         this.load.image('caexRun03', 'assets/Knights/SeperateImages/BlueKnight_entity_000_run_003.png');
         this.load.image('caexRun04', 'assets/Knights/SeperateImages/BlueKnight_entity_000_run_004.png');
         this.load.image('caexRun05', 'assets/Knights/SeperateImages/BlueKnight_entity_000_run_005.png');
+        this.load.image('caexRun05', 'assets/Knights/SeperateImages/BlueKnight_entity_000_run_005.png');
         this.load.image('caexRun06', 'assets/Knights/SeperateImages/BlueKnight_entity_000_run_006.png');
         this.load.image('caexRun07', 'assets/Knights/SeperateImages/BlueKnight_entity_000_run_007.png');
         this.load.image('caexRun08', 'assets/Knights/SeperateImages/BlueKnight_entity_000_run_008.png');
@@ -142,12 +143,9 @@ export default class SceneLien extends Phaser.Scene
             frameWidth: 128,
             frameHeight: 128
             });
-        
-        
-        this.load.image('cv','assets/Projets/CV.png');
-        this.load.image('github','assets/Projets/Github.png');
-        this.load.image('unity','assets/Projets/BadgeUnity.png');
-        
+
+
+        this.load.image('saumonitch','assets/Projets/SaumonItch.png');
         this.load.image('accueil','assets/Projets/Caex.png');
     }
 
@@ -168,25 +166,18 @@ export default class SceneLien extends Phaser.Scene
         {
             if (index==4)
             {
-                for (let jndex = 1; jndex < 3; jndex++)
+                for (let jndex = 3; jndex < 4; jndex++)
                 {
-                    walls.create(192+(128*jndex),64+128*index, 'wall');
+                    walls.create(576+(128*jndex),64+128*index, 'wall');
                 }
 
-                for (let jndex = 6; jndex < 7; jndex++)
-                {
-                    walls.create(192+(128*jndex),64+128*index, 'wall');
-                }
-
-                for (let jndex = 10; jndex < 12; jndex++)
-                {
-                    walls.create(192+(128*jndex),64+128*index, 'wall');
-                }
+            }
+            else
+            {
+                walls.create(576,64+128*index, 'wall');
+                walls.create(576+(128*6),64+128*index, 'wall');
             }
         }
-
-        //Phaser.Actions.PlaceOnRectangle(walls.getChildren(), new Phaser.Geom.Rectangle(64,64,1344,640));
-        //walls.refresh();
 
         this.player = new Player(this, "Joueur");
         updates.push(this.player);
@@ -218,18 +209,14 @@ export default class SceneLien extends Phaser.Scene
         this.teleporter = this.add.sprite(1850, 940, 'teleporter');
         this.teleporter.setScale(2);
         this.teleporter.anims.play('magic', true);
-        this.add.text(37,1035, "Paredre", { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize : 18});
+        this.add.text(10,1035, "Hippo Runbow", { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize : 18});
 
         this.teleporter2 = this.add.sprite(70, 940, 'teleporter');
         this.teleporter2.setScale(2);
         this.teleporter2.anims.play('magic', true);
-        this.add.text(1808,1035, "Zone de Jeu", { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize : 18});
+        this.add.text(1773,1035, "De Storig Kaschte", { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize : 18});
 
-        this.trigger0 = new Trigger(this,"Trigger",swords,"unity",1,"https://www.credly.com/badges/71136ca5-9769-4db6-976c-58a551be402e/public_url",false,380,260, "Certification Unity");
-
-        this.trigger1 = new Trigger(this,"Trigger",swords,"github",1,"https://github.com/Irthir",false,960,260, "Github");
-
-        this.trigger1 = new Trigger(this,"Trigger",swords,"cv",1,"./Curriculum_Vitae_Romain_S.pdf",false,1540,260, "Curriculum Vitae");
+        this.trigger1 = new Trigger(this,"Trigger",swords,"saumonitch",1,"https://weact.itch.io/octopustd",false,960,260,"O.C.T.O.P.U.S. , Itch.io");
 
         
         this.trigger10 = new Trigger(this,"Trigger",swords,"accueil",0.4,"main",true,1830,740, "Accueil");
@@ -276,11 +263,11 @@ export default class SceneLien extends Phaser.Scene
     {
         if (x==2)
         {
-            this.start("scene8");
+            this.start("scene5");
         }
         else if (x == 1)
         {
-            this.start("scenejeu");
+            this.start("scene7");
         }
     }
 
