@@ -224,7 +224,7 @@ export default class MainScene extends Phaser.Scene
             repeat: -1
         });
 
-        if (unlock || true)
+        if (unlock)
         {
             //Gestion du téléporteur
             this.teleporter = this.add.sprite(70, 940, 'teleporter');
