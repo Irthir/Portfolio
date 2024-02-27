@@ -219,7 +219,7 @@ export default class Scene5 extends Phaser.Scene
         this.teleporter2.anims.play('magic', true);
         this.add.text(1780,1035, "O.C.T.O.P.U.S.", { fontFamily: 'Georgia, "Goudy Bookletter 1911", Times, serif', fontSize : 18});
 
-        this.trigger1 = new Trigger(this,"Trigger",swords,"runbowitch",1,"https://irthir.itch.io/astral-manic-shooter",false,960,260,"Hippo Runbow, Itch.io");
+        this.trigger1 = new Trigger(this,"Trigger",swords,"runbowitch",1,"https://tiosstud.itch.io/hippo-runbow",false,960,260,"Hippo Runbow, Itch.io");
 
         
         this.trigger10 = new Trigger(this,"Trigger",swords,"accueil",0.4,"main",true,1830,740, "Accueil");
